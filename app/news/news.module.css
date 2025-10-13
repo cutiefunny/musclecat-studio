@@ -1,0 +1,160 @@
+.page {
+    padding: 2rem;
+    font-family: sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.main {
+    width: 100%;
+}
+
+.postFormContainer {
+    margin-bottom: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.postForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.postTextarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 0.8rem;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+.imagePreview {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.formActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fileInput {
+    display: none;
+}
+
+.fileLabel {
+    padding: 0.8rem 1.2rem;
+    background-color: #f0f0f0;
+    color: #333;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.fileLabel:hover {
+    background-color: #e0e0e0;
+}
+
+.submitButton {
+    padding: 0.8rem 1.5rem;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.submitButton:hover {
+    background-color: #555;
+}
+
+.thread {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.post {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    background-color: #fff;
+}
+
+.postText {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    white-space: pre-wrap; /* 줄바꿈 적용 */
+}
+
+.postImageContainer {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto 1rem auto;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.postImage {
+    object-fit: cover;
+}
+
+.postTimestamp {
+    font-size: 0.8rem;
+    color: #999;
+    text-align: right;
+}
+
+/* --- 추가된 부분 (모바일 반응형) --- */
+@media (max-width: 768px) {
+  .page {
+    padding: 1rem;
+  }
+
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .header p {
+    font-size: 1rem;
+  }
+
+  .postFormContainer, .post {
+    padding: 1rem;
+  }
+
+  .postImageContainer {
+    width: 100%; /* 이미지 너비를 화면에 꽉 채움 */
+    height: 300px; /* 높이는 유지하거나 auto로 변경 가능 */
+  }
+}

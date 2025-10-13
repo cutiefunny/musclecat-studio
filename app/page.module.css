@@ -5,6 +5,7 @@
   justify-content: center;
   min-height: 100vh;
   text-align: center;
+  padding: 1rem;
 }
 
 .buttonContainer {
@@ -12,5 +13,103 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 1rem;
+}
+
+.latestNewsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  width: 100%;
+  max-width: 90%;
+  justify-content: center;
+  margin: 0.5rem 0;
+}
+
+.newsItemLink {
+  text-decoration: none;
+  color: inherit;
+  width: 30%;
+  min-width: 250px;
+}
+
+.newsItem {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s;
+}
+
+.newsItem:hover {
+    transform: translateY(-5px);
+}
+
+.newsImageContainer {
+    width: 100%;
+    height: 150px;
+    position: relative;
+}
+
+.newsImage {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.newsContent {
+    padding: 0.75rem;
+    text-align: left;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.newsText {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 4.05rem;
+}
+
+.newsDate {
+  font-size: 0.75rem;
+  color: #888;
+  text-align: right;
+}
+
+.noNews {
+  color: #999;
+  padding: 1rem;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+/* --- 추가된 부분 (모바일 반응형) --- */
+@media (max-width: 768px) {
+  .latestNewsContainer {
+    flex-direction: column; /* 아이템을 세로로 쌓음 */
+    align-items: center; /* 가운데 정렬 */
+  }
+
+  .newsItemLink {
+    width: 90%; /* 모바일에서 너비 확장 */
+  }
+
+  /* 첫 번째 뉴스 아이템을 제외한 나머지는 숨김 */
+  .newsItemLink:not(:first-child) {
+    display: none;
+  }
 }

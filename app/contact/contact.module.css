@@ -16,18 +16,22 @@
 }
 
 .header p {
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: #666;
 }
 
 .main {
     width: 100%;
+    display: flex; /* 가로 배치 위해 flex 사용 */
+    flex-direction: column; /* 기본 세로 배치 */
+    gap: 3rem; /* 섹션 간 간격 */
 }
 
 .contactForm {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    display: none;
 }
 
 .formGroup {
@@ -62,4 +66,56 @@
 
 .submitButton:hover {
     background-color: #555;
+}
+
+/* 연락처 정보 섹션 */
+.contactInfo {
+    background-color: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.contactInfo h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+    /* 추가 */
+    text-align: center;
+}
+
+.icon {
+    font-size: 1.3rem; /* 아이콘 크기 */
+    color: #333; /* 아이콘 색상 */
+    min-width: 20px; /* 아이콘 최소 너비 (정렬용) */
+    text-align: center;
+}
+
+.infoItem {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #555;
+    /* 추가: 아이콘과 텍스트 정렬 */
+    display: flex;
+    align-items: center;
+    gap: 0.8rem; /* 아이콘과 텍스트 사이 간격 */
+}
+
+.infoItem a {
+    color: #0070f3; /* 링크 색상 */
+    text-decoration: none;
+}
+
+.infoItem a:hover {
+    text-decoration: underline;
+}
+
+/* 문의 양식 제목 */
+.contactForm h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    text-align: center;
 }

@@ -9,8 +9,20 @@ import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
 
 export default function Home() {
   const [latestNews, setLatestNews] = useState([]);
+  const [shuffledImages, setShuffledImages] = useState([]);
 
   useEffect(() => {
+    // Define and shuffle images
+    const imagePaths = [
+      '/images/D1.png',
+      '/images/D2.png',
+      '/images/D3.png',
+      '/images/D4.png',
+    ];
+    const shuffled = [...imagePaths].sort(() => Math.random() - 0.5);
+    setShuffledImages(shuffled);
+
+    // Fetch latest news
     const fetchLatestNews = async () => {
       try {
         const newsCollection = collection(db, 'news');
@@ -27,7 +39,7 @@ export default function Home() {
     };
 
     fetchLatestNews();
-  }, []);
+  }, []); // Empty dependency array ensures this runs only once on mount
 
   return (
     <div className={styles.page}>

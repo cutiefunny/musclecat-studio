@@ -1,4 +1,5 @@
 import styles from "./portfolio.module.css";
+import Image from 'next/image';
 
 export default function Portfolio() {
   const projects = [
@@ -15,12 +16,12 @@ export default function Portfolio() {
     {
       name: "인사관리앱",
       description: "직원 정보, 급여, 휴가 등 인사 관련 업무를 효율적으로 관리하는 시스템입니다.",
-      imageUrl: "/images/hr-app.png", // 예시 이미지 경로
+      imageUrl: "/images/hr-app.jpg", // 예시 이미지 경로
     },
     {
       name: "화상통화앱",
       description: "실시간 영상 통화를 통해 원활한 커뮤니케이션을 지원하는 화상 통화 솔루션입니다.",
-      imageUrl: "/images/video-call-app.png", // 예시 이미지 경로
+      imageUrl: "/images/video-call-app.jpg", // 예시 이미지 경로
     },
     {
       name: "챗봇 시나리오 빌더",
@@ -35,7 +36,12 @@ export default function Portfolio() {
     {
         name: "지도 기반 길냥이 도감 앱",
         description: "지도 위에 길고양이의 정보를 기록하고 공유하는 커뮤니티 앱입니다.",
-        imageUrl: "/images/cat-map-app.png", // 예시 이미지 경로
+        imageUrl: "/images/cat-map-app.jpg", // 예시 이미지 경로
+    },
+    {
+        name: "국장봇",
+        description: "코스피 및 코스닥의 정보와 뉴스를 기반으로 잔소리를 해주는 봇입니다.",
+        imageUrl: "/images/stock-bot.jpg", // 예시 이미지 경로
     },
   ];
 
@@ -50,14 +56,14 @@ export default function Portfolio() {
           <div key={index} className={styles.projectCard}>
             <div className={styles.imageContainer}>
                 {/* 이미지가 준비되면 아래 Image 컴포넌트의 주석을 해제하고 src 경로를 알맞게 수정해주세요. */}
-                {/* <Image
+                <Image
                     src={project.imageUrl}
                     alt={`${project.name} 스크린샷`}
                     width={300}
                     height={200}
                     className={styles.projectImage}
-                /> */}
-                <div className={styles.placeholderImage}>Image</div>
+                />
+                {/* <div className={styles.placeholderImage}>Image</div> */}
             </div>
             <h3>{project.name}</h3>
             <p>{project.description}</p>

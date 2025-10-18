@@ -65,28 +65,28 @@ const projects = [
       id: "video-call-app",
       name: "화상통화앱",
       description: "영상 크리에이터와 시청자를 연결하는 화상통화 애플리케이션입니다. WebRTC 기술을 활용하여 안정적인 영상 통화를 제공하며, 실시간 채팅 기능도 포함되어 있습니다. 2025년 말 서비스를 목표로 하고 있습니다.",
-      imageUrl: "/images/video-call-app.jpg",
-      githubUrl: "https://github.com/example/video-call-app",
-      serviceUrl: null,
-      techStack: ["WebRTC", "Node.js", "Socket.IO", "React", "Express"]
+      imageUrl: "/images/video-call-app-detail.jpg",
+      githubUrl: "https://github.com/cutiefunny/live-cam",
+      serviceUrl: "https://live-cam-eta.vercel.app/",
+      techStack: ["WebRTC", "Next.js", "peerJS", "Firebase Realtime Database"]
     },
     {
       id: "cat-map-app",
       name: "지도 기반 길냥이 도감 앱",
-      description: "지도 위에 길고양이의 정보를 기록하고 공유하는 커뮤니티 앱입니다. 사용자들이 길냥이의 사진, 위치, 특징 등을 기록하고 다른 사용자들과 소통할 수 있습니다.",
-      imageUrl: "/images/cat-map-app.jpg",
-      githubUrl: "https://github.com/example/cat-map-app",
-      serviceUrl: "https://example-service.com/cat-map-app",
-      techStack: ["React Native", "Firebase", "Naver Maps API", "Expo"]
+      description: "지도 위에 길고양이의 정보를 기록하고 공유하는 커뮤니티 앱입니다. 사용자들이 길냥이의 사진, 위치, 특징 등을 기록하고 다른 사용자들과 소통할 수 있습니다. 근육고양이 스튜디오에서 제공하는 무료 서비스이며 앱을 설치하거나 웹에 접속하여 자유롭게 이용할 수 있습니다.",
+      imageUrl: "/images/cat-map-app-detail.jpg",
+      githubUrl: "https://github.com/cutiefunny/sangsu-cat-wiki",
+      serviceUrl: "https://sangsu-cat-wiki.vercel.app/",
+      techStack: ["Next.js", "Firebase", "Naver Maps API", "PWA"]
     },
     {
       id: "stock-bot",
       name: "국장봇",
-      description: "코스피 및 코스닥의 정보와 뉴스를 기반으로 잔소리를 해주는 봇입니다. 주식 시장 동향을 유머러스하게 전달하여 사용자에게 재미와 정보를 동시에 제공합니다.",
-      imageUrl: "/images/stock-bot.jpg",
-      githubUrl: "https://github.com/example/stock-bot",
-      serviceUrl: null,
-      techStack: ["Python", "Telegram Bot API", "BeautifulSoup", "Requests", "APScheduler"]
+      description: "코스피 및 코스닥의 정보와 뉴스를 기반으로 잔소리를 해주는 봇입니다. 한국투자증권의 API와 네이버 검색을 활용하여 적절한 정보로 사용자를 조롱합니다. 근육고양이 스튜디오에서 제공하는 무료 서비스이며 앱을 설치하거나 웹에 접속하여 자유롭게 이용할 수 있습니다.",
+      imageUrl: "/images/stock-bot-detail.jpg",
+      githubUrl: "https://github.com/cutiefunny/stock-info",
+      serviceUrl: "https://stock-info-smoky.vercel.app/",
+      techStack: ["Next.js", "TypeScript", "Firebase", "PWA", "한국투자증권 Open API"]
     },
   ];
 

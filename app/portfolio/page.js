@@ -4,13 +4,23 @@ import Image from 'next/image';
 export default function Portfolio() {
   const projects = [
     {
+      name: "챗봇 시나리오 빌더",
+      description: "드래그 앤 드롭 방식으로 챗봇의 대화 흐름을 시각적으로 설계하는 도구입니다.",
+      imageUrl: "/images/chatbot-builder.jpg", // 예시 이미지 경로
+    },
+    {
+      name: "하이브리드 챗봇",
+      description: "자연어 처리 기술과 시나리오 기반 응답을 결합한 지능형 챗봇입니다.",
+      imageUrl: "/images/hybrid-chatbot.jpg", // 예시 이미지 경로
+    },
+    {
       name: "청소중개앱",
       description: "청소 서비스를 필요로 하는 사용자와 청소 업체를 연결하는 중개 플랫폼입니다.",
       imageUrl: "/images/cleaning-app.png", // 예시 이미지 경로
     },
     {
       name: "선박물 거래앱",
-      description: "선박 부품 및 자재 거래를 위한 온라인 마켓플레이스입니다.",
+      description: "컨테이너 선박물을 거래하는 온라인 마켓플레이스입니다.",
       imageUrl: "/images/shipping-app.png", // 예시 이미지 경로
     },
     {
@@ -19,19 +29,14 @@ export default function Portfolio() {
       imageUrl: "/images/hr-app.jpg", // 예시 이미지 경로
     },
     {
+      name: "마약검사앱",
+      description: "마약 검사 결과를 기록하고 관리하는 모바일 애플리케이션입니다.",
+      imageUrl: "/images/drug-test-app.jpg", // 예시 이미지 경로
+    },
+    {
       name: "화상통화앱",
       description: "실시간 영상 통화를 통해 원활한 커뮤니케이션을 지원하는 화상 통화 솔루션입니다.",
       imageUrl: "/images/video-call-app.jpg", // 예시 이미지 경로
-    },
-    {
-      name: "챗봇 시나리오 빌더",
-      description: "드래그 앤 드롭 방식으로 챗봇의 대화 흐름을 시각적으로 설계하는 도구입니다.",
-      imageUrl: "/images/chatbot-builder.png", // 예시 이미지 경로
-    },
-    {
-      name: "하이브리드 챗봇",
-      description: "자연어 처리 기술과 시나리오 기반 응답을 결합한 지능형 챗봇입니다.",
-      imageUrl: "/images/hybrid-chatbot.png", // 예시 이미지 경로
     },
     {
         name: "지도 기반 길냥이 도감 앱",

@@ -1,51 +1,74 @@
 'use client';
 
-// cutiefunny/musclecat-studio/musclecat-studio-9a81173fb6244becb85a7f9ae672a21081aa87cb/app/contact/page.js
+// cutiefunny/musclecat-studio/musclecat-studio-69b8328c83a86b17efd454da2083bf135e4c6a70/app/contact/page.js
 import styles from './contact.module.css';
 import Image from 'next/image';
-import { FaPhone, FaEnvelope, FaInstagram } from 'react-icons/fa';
-import React from 'react';
+// FaGithub 아이콘 추가
+import { FaPhone, FaEnvelope, FaInstagram, FaGithub } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
 
 export default function Contact() {
-  const [imageIndex, setImageIndex] = React.useState(Math.floor(Math.random() * 4) + 1);
+  const [imageIndex, setImageIndex] = useState(1);
+
+  // useEffect를 사용하여 컴포넌트가 클라이언트에 마운트된 후에
+  // 랜덤 이미지 인덱스를 설정합니다.
+  useEffect(() => {
+    setImageIndex(Math.floor(Math.random() * 4) + 1);
+  }, []); // 빈 배열을 전달하여 마운트 시 한 번만 실행되도록 합니다.
 
   const changeImage = () => {
-    setImageIndex(Math.floor(Math.random() * 4) + 1);
+    // 이미지를 변경할 때 현재와 다른 이미지가 나오도록 개선 (선택 사항)
+    let newIndex;
+    do {
+      newIndex = Math.floor(Math.random() * 4) + 1;
+    } while (newIndex === imageIndex);
+    setImageIndex(newIndex);
   };
 
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-          <div className={styles.imageWrapper}>
-            <Image
-              src={`/images/D${imageIndex}.png`}
-              alt="Random Image"
-              fill
-              className={styles.fillImage}
-              priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              onClick={changeImage}
-            />
-          </div>
-            </header>
-            <main className={styles.main}>
-          {/* 연락처 정보 섹션 */}
+        <div className={styles.imageWrapper} onClick={changeImage} title="클릭하여 이미지 변경">
+          <Image
+            src={`/images/D${imageIndex}.png`}
+            alt="Random Muscle Cat Image"
+            fill
+            className={styles.fillImage}
+            priority
+            sizes="(max-width: 768px) 100vw, 300px"
+          />
+        </div>
+      </header>
+      <main className={styles.main}>
         <section className={styles.contactInfo}>
-          <h2>Contact Information</h2> {/* 영어로 변경됨 */}
+          <h2>Contact Information</h2>
           <div className={styles.infoItem}>
-            {/* Mobile 텍스트 대신 아이콘 사용 */}
             <FaPhone className={styles.icon} />
             <a href="tel:010-8315-1379">010-8315-1379</a>
           </div>
           <div className={styles.infoItem}>
-            {/* Email 텍스트 대신 아이콘 사용 */}
             <FaEnvelope className={styles.icon} />
             <a href="mailto:cutiefunny@naver.com">cutiefunny@naver.com</a>
           </div>
           <div className={styles.infoItem}>
-            {/* Instagram 텍스트 대신 아이콘 사용 */}
             <FaInstagram className={styles.icon} />
             <a href="https://instagram.com/musclecat_mart" target="_blank" rel="noopener noreferrer">@musclecat_mart</a>
+          </div>
+        </section>
+
+        <section className={styles.linksInfo}>
+          <h2>Links</h2>
+          <div className={styles.infoItem}>
+            <FaGithub className={styles.icon} />
+            <a href="https://github.com/cutiefunny" target="_blank" rel="noopener noreferrer">
+              GitHub Profile
+            </a>
+          </div>
+          <div className={styles.infoItem}>
+            <span className={styles.icon}>▲</span>
+            <a href="https://vercel.com/cutiefunny" target="_blank" rel="noopener noreferrer">
+              Vercel Profile
+            </a>
           </div>
         </section>
 

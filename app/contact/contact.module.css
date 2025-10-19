@@ -1,3 +1,4 @@
+/* app/contact/contact.module.css */
 .page {
     padding: 2rem;
     font-family: sans-serif;
@@ -7,32 +8,109 @@
 
 .header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem; /* 이미지와 메인 컨텐츠 간격 조정 */
 }
 
-.header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+/* 이미지 래퍼 스타일 추가 (방법 2 적용) */
+.imageWrapper {
+  position: relative;
+  width: 250px; /* 원하는 너비 */
+  aspect-ratio: 383 / 530; /* 이미지의 실제 원본 비율 (D1.png 기준, 필요시 조정) */
+  margin: 0 auto; /* 헤더 내에서 가운데 정렬 */
+  cursor: pointer; /* 클릭 가능 표시 */
+  overflow: hidden; /* 이미지가 넘치지 않도록 */
+}
+
+/* fill prop 사용 시 Image 컴포넌트 스타일 */
+.fillImage {
+  object-fit: cover; /* 이미지가 영역을 꽉 채우도록 */
+  transition: transform 0.3s ease-in-out; /* 부드러운 전환 효과 */
+}
+
+
+.header h1 { /* 기존 h1 제거됨 (이미지로 대체) */
+    /* font-size: 2.5rem; */
+    /* margin-bottom: 0.5rem; */
 }
 
 .header p {
     font-size: 1rem;
     color: #666;
+    margin-top: 1rem; /* 이미지와의 간격 */
 }
 
 .main {
     width: 100%;
-    display: flex; /* 가로 배치 위해 flex 사용 */
-    flex-direction: column; /* 기본 세로 배치 */
-    gap: 3rem; /* 섹션 간 간격 */
-    align-items: center; /* 수직 가운데 정렬 */
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* 섹션 간 간격 조정 */
+    align-items: center;
 }
 
+/* 연락처 정보 및 링크 정보 공통 스타일 */
+.contactInfo,
+.linksInfo { /* .linksInfo 추가 */
+    background-color: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    width: 250px;
+}
+
+.contactInfo h2,
+.linksInfo h2 { /* .linksInfo 추가 */
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+    text-align: center;
+}
+
+.icon {
+    font-size: 1.3rem;
+    color: #333;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* Vercel 아이콘 대체 텍스트 스타일 */
+.icon:not([class*="Fa"]) { /* react-icons 아이콘이 아닌 경우 */
+    font-weight: bold;
+    font-size: 1.1rem; /* 크기 조정 */
+}
+
+
+.infoItem {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+/* 마지막 infoItem의 하단 여백 제거 (선택 사항) */
+.infoItem:last-child {
+    margin-bottom: 0;
+}
+
+
+.infoItem a {
+    color: #0070f3;
+    text-decoration: none;
+    word-break: break-all; /* 긴 URL 줄바꿈 */
+}
+
+.infoItem a:hover {
+    text-decoration: underline;
+}
+
+/* 문의 폼 (기존 스타일 유지, display: none;) */
 .contactForm {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    display: none;
+    display: none; /* 숨김 처리 */
 }
 
 .formGroup {
@@ -69,51 +147,6 @@
     background-color: #555;
 }
 
-/* 연락처 정보 섹션 */
-.contactInfo {
-    background-color: #f9f9f9;
-    padding: 1.5rem;
-    border-radius: 8px;
-    border: 1px solid #eee;
-}
-
-.contactInfo h2 {
-    margin-top: 0;
-    margin-bottom: 1.5rem;
-    font-size: 1.3rem;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 0.5rem;
-    /* 추가 */
-    text-align: center;
-}
-
-.icon {
-    font-size: 1.3rem; /* 아이콘 크기 */
-    color: #333; /* 아이콘 색상 */
-    min-width: 20px; /* 아이콘 최소 너비 (정렬용) */
-    text-align: center;
-}
-
-.infoItem {
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-    color: #555;
-    /* 추가: 아이콘과 텍스트 정렬 */
-    display: flex;
-    align-items: center;
-    gap: 0.8rem; /* 아이콘과 텍스트 사이 간격 */
-}
-
-.infoItem a {
-    color: #0070f3; /* 링크 색상 */
-    text-decoration: none;
-}
-
-.infoItem a:hover {
-    text-decoration: underline;
-}
-
-/* 문의 양식 제목 */
 .contactForm h2 {
     margin-top: 0;
     margin-bottom: 1.5rem;
@@ -121,15 +154,23 @@
     text-align: center;
 }
 
-/* 부모 요소 스타일 */
-.imageWrapper {
-  position: relative; /* Image fill 사용 시 필수 */
-  width: 200px; /* 원하는 너비 */
-  aspect-ratio: 383 / 530; /* 이미지의 원본 비율 (너비 / 높이) - 실제 비율로 수정 */
-    margin: 0 auto; /* 가운데 정렬 */
-}
-
-/* fill prop 사용 시 Image 컴포넌트 스타일 */
-.fillImage {
-  object-fit: contain; /* 또는 cover, 필요에 따라 선택 */
+/* 모바일 반응형 */
+@media (max-width: 480px) {
+    .page {
+        padding: 1rem;
+    }
+    .imageWrapper {
+        width: 200px; /* 모바일에서 이미지 크기 줄이기 */
+    }
+    .contactInfo h2,
+    .linksInfo h2 {
+        font-size: 1.1rem;
+    }
+    .infoItem {
+        font-size: 0.85rem;
+        gap: 0.6rem;
+    }
+    .icon {
+        font-size: 1.1rem;
+    }
 }

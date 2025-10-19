@@ -1,3 +1,4 @@
+// cutiefunny/musclecat-studio/musclecat-studio-1e58aa6ff05d2d0c24e0d313fcd9602693ca1d8a/app/news/page.js
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -16,10 +17,13 @@ import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage
 export default function News() {
   const [posts, setPosts] = useState([]);
   const [newPostText, setNewPostText] = useState('');
+  // newPostImage는 이제 File 객체 대신 처리된 Blob을 저장합니다.
   const [newPostImage, setNewPostImage] = useState(null);
+  const [originalFileName, setOriginalFileName] = useState(''); // 원본 파일 이름 저장
   const [previewImage, setPreviewImage] = useState(null);
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true); // 페이지 로딩 및 게시/수정/삭제 로딩 상태
+  const [isProcessingImage, setIsProcessingImage] = useState(false); // 이미지 처리 로딩 상태 추가
 
   const [editingPostId, setEditingPostId] = useState(null);
   const [editText, setEditText] = useState('');
@@ -53,20 +57,88 @@ export default function News() {
     fetchPosts();
   }, []);
 
+  // --- ⬇️ UPDATED: handleImageChange 함수 수정 ---
   const handleImageChange = (e) => {
-    if (e.target.files[0]) {
-      const file = e.target.files[0];
-      setNewPostImage(file);
-      setPreviewImage(URL.createObjectURL(file));
-    }
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setIsProcessingImage(true); // 이미지 처리 시작
+    setOriginalFileName(file.name); // 원본 파일 이름 저장
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = document.createElement('img');
+      img.onload = () => {
+        const MAX_DIMENSION = 400;
+        let targetWidth = img.width;
+        let targetHeight = img.height;
+
+        // 긴 축 기준으로 400px 넘는지 확인하고 비율에 맞게 축소
+        if (img.width > MAX_DIMENSION || img.height > MAX_DIMENSION) {
+          if (img.width > img.height) {
+            targetWidth = MAX_DIMENSION;
+            targetHeight = Math.round((img.height * MAX_DIMENSION) / img.width);
+          } else {
+            targetHeight = MAX_DIMENSION;
+            targetWidth = Math.round((img.width * MAX_DIMENSION) / img.height);
+          }
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+        const ctx = canvas.getContext('2d');
+
+        // 캔버스에 이미지 그리기 (리사이징)
+        ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+
+        canvas.toBlob((blob) => {
+          if (blob) {
+            setNewPostImage(blob); // 처리된 Blob 저장
+            setPreviewImage(URL.createObjectURL(blob)); // 미리보기 업데이트
+          } else {
+            console.error("AVIF 변환 실패");
+            alert("이미지를 AVIF 형식으로 변환하는데 실패했습니다. 다른 이미지를 사용해보세요.");
+            setNewPostImage(null);
+            setPreviewImage(null);
+            setOriginalFileName('');
+            // 파일 입력 필드 초기화 (선택 사항)
+            e.target.value = "";
+          }
+          setIsProcessingImage(false); // 이미지 처리 완료
+        }, 'image/avif', 1); // AVIF 포맷, 품질 100%
+      };
+      img.onerror = () => {
+        console.error("이미지 로드 실패");
+        alert("이미지를 불러오는데 실패했습니다.");
+        setIsProcessingImage(false); // 이미지 처리 완료 (실패)
+        setNewPostImage(null);
+        setPreviewImage(null);
+        setOriginalFileName('');
+         // 파일 입력 필드 초기화 (선택 사항)
+         e.target.value = "";
+      };
+      img.src = event.target.result;
+    };
+    reader.onerror = () => {
+      console.error("파일 읽기 실패");
+      alert("파일을 읽는데 실패했습니다.");
+      setIsProcessingImage(false); // 이미지 처리 완료 (실패)
+      setNewPostImage(null);
+      setPreviewImage(null);
+      setOriginalFileName('');
+       // 파일 입력 필드 초기화 (선택 사항)
+       e.target.value = "";
+    };
+    reader.readAsDataURL(file);
   };
+  // --- handleImageChange 함수 수정 끝 ---
 
-  // --- ⬇️ REMOVED: `canvas`를 사용하는 processImage 함수 제거 ---
-  // const processImage = ...
-
+  // --- ⬇️ UPDATED: handleSubmit 함수 수정 ---
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!isAdmin || (!newPostText.trim() && !newPostImage) || isLoading) return;
+    // 이미지 처리 중이거나 필수 입력값 없을 때 처리 방지
+    if (!isAdmin || (!newPostText.trim() && !newPostImage) || isLoading || isProcessingImage) return;
 
     setIsLoading(true);
 
@@ -74,11 +146,13 @@ export default function News() {
     let imageName = null;
 
     try {
-      if (newPostImage) {
-        // --- ⬇️ UPDATED: 원본 파일 이름 사용 ---
-        imageName = `${Date.now()}-${newPostImage.name.replace(/\s+/g, '-')}`;
+      if (newPostImage && originalFileName) { // 처리된 Blob과 원본 파일 이름이 있는지 확인
+        // 원본 파일 이름에서 확장자 제거하고 .avif 추가
+        const nameWithoutExtension = originalFileName.split('.').slice(0, -1).join('.');
+        imageName = `${Date.now()}-${nameWithoutExtension.replace(/\s+/g, '-')}.avif`; // .avif 확장자 명시
         const imageRef = ref(storage, `news/${imageName}`);
-        // --- ⬇️ UPDATED: `processImage` 호출 제거, 원본 파일(newPostImage) 직접 업로드 ---
+
+        // 처리된 AVIF Blob(newPostImage) 업로드
         await uploadBytes(imageRef, newPostImage);
         imageUrl = await getDownloadURL(imageRef);
       }
@@ -88,14 +162,16 @@ export default function News() {
         imageUrl: imageUrl,
         timestamp: serverTimestamp(),
         author: user.email,
-        imageName: imageName,
+        imageName: imageName, // .avif 파일 이름 저장
       });
 
       setNewPostText('');
       setNewPostImage(null);
       setPreviewImage(null);
-      if (e.target.imageUpload) {
-        e.target.imageUpload.value = "";
+      setOriginalFileName(''); // 원본 파일 이름 초기화
+      // 파일 입력 필드 직접 초기화
+      if (document.getElementById('imageUpload')) {
+         document.getElementById('imageUpload').value = "";
       }
       await fetchPosts();
 
@@ -106,6 +182,7 @@ export default function News() {
       setIsLoading(false);
     }
   };
+   // --- handleSubmit 함수 수정 끝 ---
 
   const handleEdit = (post) => {
     setEditingPostId(post.id);
@@ -178,24 +255,29 @@ export default function News() {
                 placeholder="새로운 소식을 공유해보세요..."
                 value={newPostText}
                 onChange={(e) => setNewPostText(e.target.value)}
-                disabled={isLoading}
+                disabled={isLoading || isProcessingImage} // 이미지 처리 중 비활성화
               />
               {previewImage && (
                 <div className={styles.imagePreviewContainer}>
                   <Image src={previewImage} alt="Preview" width={100} height={100} className={styles.imagePreview} />
                 </div>
               )}
+               {isProcessingImage && <p>이미지 처리 중...</p>} {/* 이미지 처리 중 메시지 */}
               <div className={styles.formActions}>
                 <input
                   type="file"
-                  id="imageUpload"
+                  id="imageUpload" // id 추가
                   accept="image/*"
                   onChange={handleImageChange}
                   className={styles.fileInput}
-                  disabled={isLoading}
+                  disabled={isLoading || isProcessingImage} // 이미지 처리 중 비활성화
                 />
                 <label htmlFor="imageUpload" className={styles.fileLabel}>이미지 선택</label>
-                <button type="submit" className={styles.submitButton} disabled={isLoading}>
+                <button
+                  type="submit"
+                  className={styles.submitButton}
+                  disabled={isLoading || isProcessingImage || (!newPostText.trim() && !newPostImage)} // 이미지 처리 중 또는 내용 없을 때 비활성화
+                >
                   {isLoading ? '처리 중...' : '게시'}
                 </button>
               </div>
@@ -204,6 +286,7 @@ export default function News() {
         )}
 
         <div className={styles.thread}>
+          {/* 로딩 상태 및 게시글 렌더링 (기존과 동일) */}
           {isLoading && posts.length === 0 ? (
              <div className={styles.post}>
                <p className={styles.loadingMessage}>소식을 불러오는 중...</p>
@@ -236,12 +319,11 @@ export default function News() {
                   <>
                     <p className={styles.postText}>{post.text}</p>
                     {post.imageUrl && (
-                      // --- ⬇️ UPDATED: Wrapper div 제거, Image props 변경 ---
                       <Image
                         src={post.imageUrl}
                         alt="게시물 이미지"
-                        width={500}  // 레이아웃 유지를 위한 값, CSS로 제어됨
-                        height={500} // 레이아웃 유지를 위한 값, CSS로 제어됨
+                        width={500}
+                        height={500}
                         className={styles.postImage}
                        />
                     )}
@@ -266,4 +348,3 @@ export default function News() {
     </div>
   );
 }
-

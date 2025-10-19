@@ -1,3 +1,4 @@
+// cutiefunny/musclecat-studio/musclecat-studio-1e58aa6ff05d2d0c24e0d313fcd9602693ca1d8a/app/page.js
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -95,7 +96,7 @@ export default function Home() {
           <Image src="/images/portfolio-button.png" alt="포트폴리오 보러가기" width={200} height={80} style={{ width: 'auto', height: '50px' }} />
         </Link>
 
-        {/* 포트폴리오 이미지 슬라이더 */}
+        {/* 포트폴리오 이미지 슬라이더 (기존 코드 유지) */}
         <div className={styles.portfolioSliderContainer}>
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
@@ -135,6 +136,13 @@ export default function Home() {
             ))}
           </Swiper>
         </div>
+
+        {/* --- ⬇️ ADDED: 굿즈 버튼 추가 --- */}
+        <Link href="/goods">
+          {/* public/images/goods-button.png 이미지가 있다고 가정 */}
+          <Image src="/images/goods-button.png" alt="굿즈 보러가기" width={200} height={80} style={{ width: 'auto', height: '50px' }} />
+        </Link>
+        {/* --- 굿즈 버튼 추가 끝 --- */}
 
         {/* 문의하기 버튼 (기존 코드 유지) */}
         <Link href="/contact">

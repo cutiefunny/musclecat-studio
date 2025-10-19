@@ -8,8 +8,7 @@ export default function Portfolio() {
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <h1>포트폴리오</h1>
-        <p>근육고양이 스튜디오에서 진행한 프로젝트들을 소개합니다.</p>
+        {/* <h1>포트폴리오</h1> */}
       </header>
       <main className={styles.portfolioGrid}>
         {projects.map((project) => (

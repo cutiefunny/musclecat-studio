@@ -199,10 +199,22 @@
     width: 90%;
   }
 
-  .newsItemLink:not(:first-child),
-  .goodsItemLink:not(:first-child) { /* 첫 번째 항목 외 숨김 */
+  .newsItemLink:not(:first-child) { /* 첫 번째 뉴스 항목 외 숨김 */
     display: none;
   }
+
+  /* --- ⬇️ REMOVED: 기존 굿즈 숨김 로직 제거 --- */
+  /* .goodsItemLink:not(:first-child) { display: none; } */
+
+  /* --- ⬇️ ADDED: 모바일 굿즈 표시/숨김 클래스 추가 --- */
+  .mobileHiddenGoodsItem {
+    display: none; /* 기본적으로 숨김 */
+  }
+
+  .mobileVisibleGoodsItem {
+    display: block; /* 보여줄 아이템만 표시 */
+  }
+  /* --- 굿즈 표시/숨김 클래스 끝 --- */
 
   /* 모바일에서 슬라이더 너비 */
   .portfolioSliderContainer {
@@ -224,10 +236,16 @@
   .latestNewsContainer,
   .latestGoodsContainer { /* .latestGoodsContainer 추가 */
     margin-bottom: 1rem;
+    /* --- ⬇️ ADDED: PC에서는 flex-direction: row 유지 --- */
+    flex-direction: row;
+    align-items: stretch; /* 아이템 높이 맞춤 */
   }
 
   .newsItemLink,
   .goodsItemLink { /* .goodsItemLink 추가 */
     height: 100%; /* PC에서 카드 높이 맞춤 */
+    /* --- ⬇️ ADDED: PC에서는 모든 굿즈 아이템 표시 --- */
+    display: block !important; /* 모바일 숨김 스타일 오버라이드 */
+    width: 30%; /* PC 너비 유지 */
   }
 }

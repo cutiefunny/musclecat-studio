@@ -26,15 +26,21 @@ import { goodsItems as allGoodsItems } from '@/data/goods'; // 굿즈 데이터 
 export default function Home() {
   const [latestNews, setLatestNews] = useState([]);
   const [shuffledPortfolioImages, setShuffledPortfolioImages] = useState([]);
-  const [latestGoods, setLatestGoods] = useState([]); // 최신 굿즈 상태 추가
+  // --- ⬇️ UPDATED: latestGoods -> displayedGoods로 이름 변경 및 mobileGoodsIndex 상태 추가 ---
+  const [displayedGoods, setDisplayedGoods] = useState([]); // 화면에 표시될 굿즈 (랜덤 3개)
+  const [mobileGoodsIndex, setMobileGoodsIndex] = useState(0); // 모바일에서 현재 보여줄 굿즈 인덱스
+  // --- 상태 변경 끝 ---
 
   useEffect(() => {
     // --- 포트폴리오 이미지 셔플 ---
     const shuffledPortfolios = [...portfolioImageUrls].sort(() => Math.random() - 0.5);
     setShuffledPortfolioImages(shuffledPortfolios);
 
-    // --- 최신 굿즈 설정 (상위 3개) ---
-    setLatestGoods(allGoodsItems.slice(0, 3)); // goods 데이터에서 처음 3개 항목 가져오기
+    // --- ⬇️ UPDATED: 최신 굿즈 설정 로직 변경 (랜덤 3개 선택) ---
+    // 전체 굿즈 목록을 섞고 상위 3개 선택
+    const shuffledGoods = [...allGoodsItems].sort(() => Math.random() - 0.5);
+    setDisplayedGoods(shuffledGoods.slice(0, 3));
+    // --- 굿즈 설정 로직 변경 끝 ---
 
     // Fetch latest news
     const fetchLatestNews = async () => {
@@ -54,6 +60,20 @@ export default function Home() {
 
     fetchLatestNews();
   }, []); // 빈 배열을 두어 마운트 시 한 번만 실행되도록 함
+
+  // --- ⬇️ ADDED: 모바일 굿즈 순환 로직 추가 ---
+  useEffect(() => {
+    // displayedGoods가 1개 이상일 때만 인터벌 설정
+    if (displayedGoods.length > 0) {
+      const intervalId = setInterval(() => {
+        setMobileGoodsIndex((prevIndex) => (prevIndex + 1) % displayedGoods.length);
+      }, 5000); // 3초마다 인덱스 변경
+
+      // 컴포넌트 언마운트 시 인터벌 정리
+      return () => clearInterval(intervalId);
+    }
+  }, [displayedGoods]); // displayedGoods가 변경될 때마다 인터벌 재설정
+  // --- 모바일 굿즈 순환 로직 끝 ---
 
   return (
     <div className={styles.page}>
@@ -142,10 +162,17 @@ export default function Home() {
           <Image src="/images/goods-button.png" alt="굿즈 보러가기" width={200} height={80} style={{ width: 'auto', height: '50px' }} />
         </Link>
 
-        {/* --- ⬇️ ADDED: 최신 굿즈 표시 섹션 추가 --- */}
+        {/* --- ⬇️ UPDATED: 최신 굿즈 표시 섹션 로직 수정 --- */}
         <div className={styles.latestGoodsContainer}>
-          {latestGoods.length > 0 ? latestGoods.map(item => (
-            <Link href={item.link} key={item.id} className={styles.goodsItemLink} target="_blank" rel="noopener noreferrer">
+          {displayedGoods.length > 0 ? displayedGoods.map((item, index) => (
+            <Link
+              href={item.link}
+              key={item.id}
+              // --- ⬇️ UPDATED: 모바일에서 현재 인덱스만 보이도록 클래스 조건 추가 ---
+              className={`${styles.goodsItemLink} ${styles.desktopGoodsItem} ${index === mobileGoodsIndex ? styles.mobileVisibleGoodsItem : styles.mobileHiddenGoodsItem}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <div className={styles.goodsItem}>
                 {item.imageUrl && (
                   <div className={styles.goodsImageContainer}>
@@ -167,6 +194,7 @@ export default function Home() {
           )) : <p className={styles.noGoods}>판매 중인 상품이 없습니다.</p>}
         </div>
         {/* --- 최신 굿즈 표시 섹션 끝 --- */}
+
 
         {/* 문의하기 버튼 */}
         <Link href="/contact">

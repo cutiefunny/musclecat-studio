@@ -1,11 +1,12 @@
+/* app/page.module.css */
 .page {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  text-align: center;
+  /* justify-content: center; */ /* 중앙 정렬보다는 상단 정렬이 일반적 */
   padding: 1rem;
+  /* PC 버전에서 최대 너비 제한 위해 margin 추가 */
+  margin: 0 auto;
 }
 
 .buttonContainer {
@@ -15,6 +16,7 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  width: 100%; /* 버튼 컨테이너 너비 */
 }
 
 .latestNewsContainer {
@@ -22,7 +24,7 @@
   flex-direction: row;
   gap: 1rem;
   width: 100%;
-  max-width: 90%;
+  /* max-width: 90%; 삭제 -> PC에서는 .page의 max-width 적용 */
   justify-content: center;
   margin: 0.5rem 0;
 }
@@ -81,7 +83,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  min-height: 4.05rem;
+  min-height: 4.05rem; /* line-height * line-clamp */
 }
 
 .newsDate {
@@ -97,102 +99,98 @@
   width: 100%;
 }
 
-/* --- 추가된 부분 (모바일 반응형) --- */
-@media (max-width: 768px) {
-  .latestNewsContainer {
-    flex-direction: column; /* 아이템을 세로로 쌓음 */
-    align-items: center; /* 가운데 정렬 */
-  }
-
-  .newsItemLink {
-    width: 90%; /* 모바일에서 너비 확장 */
-  }
-
-  /* 첫 번째 뉴스 아이템을 제외한 나머지는 숨김 */
-  .newsItemLink:not(:first-child) {
-    display: none;
-  }
-}
-
 /* --- 포트폴리오 슬라이더 --- */
 .portfolioSliderContainer {
-  width: 300px;
-  max-width: 90%; /* 최대 너비 제한 (뉴스 컨테이너와 유사하게) */
-  margin: 1rem 0; /* 위아래 여백 */
+  /* width: 300px; 삭제 -> PC/모바일 분리 */
+  max-width: 90%; /* 모바일 기본 최대 너비 */
+  width: 100%; /* 모바일 기본 너비 */
+  margin: 1rem 0;
 }
 
-/* Swiper 컴포넌트 자체에 대한 스타일 (필요시) */
 .portfolioSwiper {
-  padding-bottom: 30px; /* 페이지네이션 공간 확보 */
+  padding-bottom: 30px;
 }
 
-/* 각 슬라이드 아이템 */
 .portfolioSlide {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f0f0f0; /* 이미지 로딩 전 배경색 */
-  border-radius: 8px; /* 이미지 모서리 둥글게 (선택 사항) */
-  overflow: hidden; /* 이미지 모서리 둥글게 적용 */
-  aspect-ratio: 3 / 2; /* 이미지 비율 유지 (width/height 대신 사용 가능) */
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
 }
 
-/* 슬라이드 내 이미지 */
 .portfolioImage {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 이미지가 슬라이드 영역을 꽉 채우도록 */
+  object-fit: cover;
 }
-
-/* Swiper 네비게이션 버튼 스타일 커스터마이징 (선택 사항) */
-/* .portfolioSwiper .swiper-button-prev,
-.portfolioSwiper .swiper-button-next {
-  color: #333;
-} */
-
-/* Swiper 페이지네이션 스타일 커스터마이징 (선택 사항) */
-/* .portfolioSwiper .swiper-pagination-bullet-active {
-  background-color: #333;
-} */
 
 /* --- 홈 페이지 연락처 정보 --- */
 .contactInfoHome {
   display: flex;
-  justify-content: center; /* 아이템들을 가운데 정렬 */
+  justify-content: center;
   align-items: center;
-  gap: 1.5rem; /* 아이템 간 간격 */
-  margin-top: 1rem; /* 문의하기 버튼과의 간격 */
-  flex-wrap: wrap; /* 화면 작을 때 줄바꿈 */
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 .infoItem {
   display: flex;
   align-items: center;
-  gap: 0.5rem; /* 아이콘과 텍스트 사이 간격 */
-  font-size: 0.9rem; /* 홈 페이지에서는 약간 작게 */
+  gap: 0.5rem;
+  font-size: 0.9rem;
   color: #555;
 }
 
 .icon {
-  font-size: 1.1rem; /* 아이콘 크기 */
-  color: #333; /* 아이콘 색상 */
+  font-size: 1.1rem;
+  color: #333;
 }
 
 .infoItem a {
-  color: #555; /* 기본 텍스트 색상과 동일하게 */
+  color: #555;
   text-decoration: none;
 }
 
 .infoItem a:hover {
-  color: #0070f3; /* 호버 시 색상 변경 */
+  color: #0070f3;
   text-decoration: underline;
 }
 
-/* 모바일에서는 슬라이더 너비 조정 */
+/* --- 모바일 반응형 --- */
 @media (max-width: 768px) {
+  .latestNewsContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .newsItemLink {
+    width: 90%;
+  }
+
+  .newsItemLink:not(:first-child) {
+    display: none;
+  }
+
+  /* 모바일에서 슬라이더 너비 */
   .portfolioSliderContainer {
-    max-width: 100%; /* 모바일에서는 꽉 채움 */
+    max-width: 100%;
   }
 }
 
+/* --- PC 반응형 --- */
+@media (min-width: 769px) {
+  .page {
+    max-width: 800px; /* PC 최대 너비 제한 */
+  }
+
+  .portfolioSliderContainer {
+    width: 80%; /* PC 슬라이더 너비 */
+    max-width: none; /* PC에서는 max-width 제한 해제 */
+  }
+}

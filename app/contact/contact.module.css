@@ -25,6 +25,7 @@
     display: flex; /* 가로 배치 위해 flex 사용 */
     flex-direction: column; /* 기본 세로 배치 */
     gap: 3rem; /* 섹션 간 간격 */
+    align-items: center; /* 수직 가운데 정렬 */
 }
 
 .contactForm {
@@ -118,4 +119,17 @@
     margin-bottom: 1.5rem;
     font-size: 1.5rem;
     text-align: center;
+}
+
+/* 부모 요소 스타일 */
+.imageWrapper {
+  position: relative; /* Image fill 사용 시 필수 */
+  width: 200px; /* 원하는 너비 */
+  aspect-ratio: 383 / 530; /* 이미지의 원본 비율 (너비 / 높이) - 실제 비율로 수정 */
+    margin: 0 auto; /* 가운데 정렬 */
+}
+
+/* fill prop 사용 시 Image 컴포넌트 스타일 */
+.fillImage {
+  object-fit: contain; /* 또는 cover, 필요에 따라 선택 */
 }

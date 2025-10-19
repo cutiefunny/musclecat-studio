@@ -1,4 +1,4 @@
-// cutiefunny/musclecat-studio/musclecat-studio-9a81173fb6244becb85a7f9ae672a21081aa87cb/app/page.js
+// cutiefunny/musclecat-studio/musclecat-studio-69b8328c83a86b17efd454da2083bf135e4c6a70/app/page.js
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -11,53 +11,29 @@ import { FaPhone, FaEnvelope, FaInstagram } from 'react-icons/fa';
 
 // --- Swiper Import ---
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules'; // 필요한 모듈 import
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 // --- Swiper Import End ---
 
-// --- 임시 데이터 (실제로는 별도 파일에서 import 권장) ---
-// portfolio/page.js 에 있는 projects 데이터와 동일하게 유지해야 합니다.
-const portfolioImages = [
-  "/images/chatbot-builder.jpg",
-  "/images/hybrid-chatbot.jpg",
-  "/images/cleaning-app.png",
-  "/images/shipping-app.png",
-  "/images/hr-app.jpg",
-  "/images/drug-test-app.jpg",
-  "/images/video-call-app.jpg",
-  "/images/cat-map-app.jpg",
-  "/images/stock-bot.jpg",
-];
-// --- 임시 데이터 끝 ---
+// --- 프로젝트 데이터 Import ---
+import { portfolioImageUrls } from '@/data/projects'; // 분리된 데이터에서 이미지 URL 목록 가져오기
+// --- 프로젝트 데이터 Import End ---
 
 
 export default function Home() {
   const [latestNews, setLatestNews] = useState([]);
-  // const [shuffledImages, setShuffledImages] = useState([]); // 기존 상태 제거 또는 주석 처리
-  const [shuffledPortfolioImages, setShuffledPortfolioImages] = useState([]); // 슬라이더용 상태
+  const [shuffledPortfolioImages, setShuffledPortfolioImages] = useState([]);
 
   useEffect(() => {
-    // --- 기존 이미지 셔플 로직 제거 또는 주석 처리 ---
-    /*
-    const imagePaths = [
-      '/images/D1.png',
-      '/images/D2.png',
-      '/images/D3.png',
-      '/images/D4.png',
-    ];
-    const shuffled = [...imagePaths].sort(() => Math.random() - 0.5);
-    setShuffledImages(shuffled);
-    */
-    // --- 기존 이미지 셔플 로직 끝 ---
-
     // --- 포트폴리오 이미지 셔플 ---
-    const shuffledPortfolios = [...portfolioImages].sort(() => Math.random() - 0.5);
+    // portfolioImageUrls를 사용하여 셔플
+    const shuffledPortfolios = [...portfolioImageUrls].sort(() => Math.random() - 0.5);
     setShuffledPortfolioImages(shuffledPortfolios);
     // --- 포트폴리오 이미지 셔플 끝 ---
 
-    // Fetch latest news (기존 코드 유지)
+    // Fetch latest news
     const fetchLatestNews = async () => {
       try {
         const newsCollection = collection(db, 'news');
@@ -74,12 +50,15 @@ export default function Home() {
     };
 
     fetchLatestNews();
-  }, []);
+  }, []); // 빈 배열을 두어 마운트 시 한 번만 실행되도록 함
 
   return (
     <div className={styles.page}>
-      <Image src="/images/title.png" alt="근육고양이 스튜디오" width={500} height={300} style={{ width: '350px', height: 'auto' }} />
+      {/* 타이틀 이미지 (기존 코드 유지) */}
+      <Image src="/images/title.png" alt="근육고양이 스튜디오" width={500} height={300} style={{ width: '350px', height: 'auto' }} priority />
+
       <div className={styles.buttonContainer}>
+        {/* 뉴스 버튼 (기존 코드 유지) */}
         <Link href="/news">
           <Image src="/images/news-button.png" alt="뉴스 보러가기" width={200} height={80} style={{ width: 'auto', height: '50px' }} />
         </Link>
@@ -94,7 +73,7 @@ export default function Home() {
                     <Image
                       src={news.imageUrl}
                       alt="뉴스 이미지"
-                      width={150}
+                      width={150} // Image 컴포넌트에는 width, height 필수
                       height={150}
                       className={styles.newsImage}
                     />
@@ -111,69 +90,72 @@ export default function Home() {
           )) : <p className={styles.noNews}>새로운 소식이 없습니다.</p>}
         </div>
 
+        {/* 포트폴리오 버튼 (기존 코드 유지) */}
         <Link href="/portfolio">
           <Image src="/images/portfolio-button.png" alt="포트폴리오 보러가기" width={200} height={80} style={{ width: 'auto', height: '50px' }} />
         </Link>
 
-        {/* --- 포트폴리오 이미지 슬라이더 추가 --- */}
+        {/* 포트폴리오 이미지 슬라이더 */}
         <div className={styles.portfolioSliderContainer}>
           <Swiper
-            modules={[Navigation, Pagination, Autoplay]} // 사용할 모듈 등록
-            spaceBetween={10} // 슬라이드 간 간격
-            slidesPerView={1} // 기본값 (모바일)
-            loop={true} // 무한 루프
-            autoplay={{ // 자동 넘김 설정
+            modules={[Navigation, Pagination, Autoplay]}
+            spaceBetween={10}
+            slidesPerView={1}
+            loop={true}
+            autoplay={{
               delay: 3000,
-              disableOnInteraction: false, // 사용자 인터랙션 후에도 자동 재생 유지
+              disableOnInteraction: false,
             }}
-            pagination={{ clickable: true }} // 페이지네이션 (점)
-            breakpoints={{ // 화면 크기별 설정
-              // 640px 이상일 때
+            pagination={{ clickable: true }}
+            breakpoints={{
               640: {
                 slidesPerView: 3,
                 spaceBetween: 15,
               },
-              // 1024px 이상일 때
               1024: {
                 slidesPerView: 3,
                 spaceBetween: 20,
               },
             }}
-            className={styles.portfolioSwiper} // 커스텀 스타일 적용을 위한 클래스
+            className={styles.portfolioSwiper}
           >
+            {/* 셔플된 이미지 URL 사용 */}
             {shuffledPortfolioImages.map((imageUrl, index) => (
               <SwiperSlide key={index} className={styles.portfolioSlide}>
                 <Image
                   src={imageUrl}
                   alt={`포트폴리오 이미지 ${index + 1}`}
-                  width={300} // 슬라이드 이미지 크기 (조절 필요)
-                  height={200} // 슬라이드 이미지 크기 (조절 필요)
-                  className={styles.portfolioImage} // 이미지 스타일
+                  width={300}
+                  height={200}
+                  className={styles.portfolioImage}
+                  // 로딩 최적화를 위해 loading="lazy" 추가 고려
+                  loading="lazy"
                 />
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
-        {/* --- 슬라이더 끝 --- */}
 
+        {/* 문의하기 버튼 (기존 코드 유지) */}
         <Link href="/contact">
           <Image src="/images/contact-button.png" alt="문의하기" width={200} height={80} style={{ width: 'auto', height: '50px' }} />
         </Link>
-        <div className={styles.infoItem}>
-            {/* Mobile 텍스트 대신 아이콘 사용 */}
-            <FaPhone className={styles.icon} />
-            <a href="tel:010-8315-1379">010-8315-1379</a>
-          </div>
+
+        {/* 연락처 정보 (기존 코드 유지) */}
+        <div className={styles.contactInfoHome}> {/* 홈 페이지용 스타일 클래스 적용 */}
           <div className={styles.infoItem}>
-            {/* Email 텍스트 대신 아이콘 사용 */}
-            <FaEnvelope className={styles.icon} />
-            <a href="mailto:cutiefunny@naver.com">cutiefunny@naver.com</a>
-          </div>
-          <div className={styles.infoItem}>
-            {/* Instagram 텍스트 대신 아이콘 사용 */}
-            <FaInstagram className={styles.icon} />
-            <a href="https://instagram.com/musclecat_mart" target="_blank" rel="noopener noreferrer">@musclecat_mart</a>
-          </div>
+              <FaPhone className={styles.icon} />
+              <a href="tel:010-8315-1379">010-8315-1379</a>
+            </div>
+            <div className={styles.infoItem}>
+              <FaEnvelope className={styles.icon} />
+              <a href="mailto:cutiefunny@naver.com">cutiefunny@naver.com</a>
+            </div>
+            <div className={styles.infoItem}>
+              <FaInstagram className={styles.icon} />
+              <a href="https://instagram.com/musclecat_mart" target="_blank" rel="noopener noreferrer">@musclecat_mart</a>
+            </div>
+        </div>
       </div>
     </div>
   );

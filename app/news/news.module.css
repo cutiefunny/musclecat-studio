@@ -1,7 +1,7 @@
 .page {
     padding: 2rem;
     font-family: sans-serif;
-    max-width: 800px;
+    /* 추가: PC 최대 너비 제한 위해 */
     margin: 0 auto;
 }
 
@@ -29,6 +29,7 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 1.5rem;
+    background-color: #f9f9f9; /* 배경색 추가 (선택 사항) */
 }
 
 .postForm {
@@ -45,19 +46,29 @@
     border-radius: 4px;
     font-size: 1rem;
     resize: vertical;
+    box-sizing: border-box; /* 패딩 포함 너비 계산 */
+}
+
+.imagePreviewContainer { /* 이미지 미리보기 컨테이너 추가 */
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem; /* 액션 버튼과의 간격 */
+    text-align: left; /* 왼쪽 정렬 */
 }
 
 .imagePreview {
     max-width: 100px;
     max-height: 100px;
     border-radius: 8px;
-    overflow: hidden;
+    border: 1px solid #eee; /* 테두리 추가 */
+    object-fit: cover; /* 비율 유지하며 채우기 */
 }
 
 .formActions {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap; /* 작은 화면에서 줄바꿈 */
+    gap: 0.5rem; /* 버튼 간 간격 */
 }
 
 .fileInput {
@@ -71,6 +82,7 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s;
+    font-size: 0.9rem; /* 폰트 크기 조정 */
 }
 
 .fileLabel:hover {
@@ -88,7 +100,7 @@
     transition: background-color 0.2s;
 }
 
-.submitButton:hover {
+.submitButton:hover:not(:disabled) { /* 비활성화 아닐 때만 호버 효과 */
     background-color: #555;
 }
 
@@ -103,35 +115,146 @@
     border-radius: 8px;
     padding: 1.5rem;
     background-color: #fff;
+    overflow-wrap: break-word; /* 긴 텍스트 줄바꿈 */
+    word-break: break-word;
 }
 
 .postText {
     font-size: 1.1rem;
     line-height: 1.6;
-    margin-bottom: 1rem;
-    white-space: pre-wrap; /* 줄바꿈 적용 */
+    margin: 0 0 1rem 0; /* 상단 여백 제거 */
+    white-space: pre-wrap;
 }
 
-.postImageContainer {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    margin: 0 auto 1rem auto;
-    border-radius: 8px;
-    overflow: hidden;
-}
+/* --- ⬇️ REMOVED: .postImageContainer 스타일 제거 --- */
 
+/* --- ⬇️ UPDATED: .postImage 스타일 수정 --- */
 .postImage {
-    object-fit: cover;
+  max-width: 100%; /* 큰 이미지는 컨테이너 너비에 맞게 축소 */
+  width: auto; /* 🔥 추가: 이미지 너비를 원본에 맞춤 (확대 방지) */
+  height: auto;      /* 이미지 비율 유지 */
+  display: block;     /* 불필요한 하단 공백 제거 */
+  margin: 0 auto 1rem auto; /* 이미지를 가운데 정렬하고 하단 여백 추가 */
+  border-radius: 8px; /* 모서리 둥글게 유지 */
+}
+
+
+.postMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  flex-wrap: wrap; /* 작은 화면에서 줄바꿈 */
+  gap: 0.5rem;
 }
 
 .postTimestamp {
-    font-size: 0.8rem;
-    color: #999;
-    text-align: right;
+  font-size: 0.8rem;
+  color: #999;
 }
 
-/* --- 추가된 부분 (모바일 반응형) --- */
+.postActions button {
+  margin-left: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff; /* 기본 배경 */
+  transition: background-color 0.2s;
+}
+
+.editButton {
+  /* background-color: #f0f0f0; */
+  color: #333;
+}
+
+.deleteButton {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-color: #f5c6cb;
+}
+
+.editButton:hover:not(:disabled) {
+  background-color: #e0e0e0;
+}
+.deleteButton:hover:not(:disabled) {
+  background-color: #f1b0b7;
+}
+
+/* --- 수정 폼 스타일 --- */
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem; /* 아래 게시글과의 간격 */
+}
+
+.editTextarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 0.8rem;
+  border: 1px solid #007bff; /* 수정 중임을 강조 */
+  border-radius: 4px;
+  font-size: 1rem;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.editActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.editActions button {
+   padding: 0.5rem 1rem;
+   font-size: 0.9rem;
+   cursor: pointer;
+   border: none;
+   border-radius: 4px;
+}
+
+.saveButton {
+  background-color: #28a745;
+  color: white;
+}
+.saveButton:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.cancelButton {
+  background-color: #ddd;
+  color: #333;
+}
+.cancelButton:hover:not(:disabled) {
+  background-color: #bbb;
+}
+
+/* 로딩 중 버튼 비활성화 스타일 */
+.submitButton:disabled,
+.editActions button:disabled,
+.postActions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 로딩 메시지 스타일 */
+.loadingMessage {
+    text-align: center;
+    padding: 2rem;
+    color: #888;
+}
+
+
+/* --- PC 반응형 --- */
+@media (min-width: 769px) {
+  .page {
+    max-width: 800px; /* PC 최대 너비 제한 */
+  }
+}
+
+/* --- 모바일 반응형 --- */
 @media (max-width: 768px) {
   .page {
     padding: 1rem;
@@ -152,135 +275,15 @@
   .postFormContainer, .post {
     padding: 1rem;
   }
-
-  .postImageContainer {
-    width: 100%; /* 이미지 너비를 화면에 꽉 채움 */
-    height: 300px; /* 높이는 유지하거나 auto로 변경 가능 */
-  }
-}
-
-/* --- 게시글 메타 정보 및 액션 버튼 --- */
-.postMeta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 1rem;
-}
-
-.postTimestamp {
-  font-size: 0.8rem;
-  color: #999;
-}
-
-.postActions button {
-  margin-left: 0.5rem;
-  padding: 0.3rem 0.6rem;
-  font-size: 0.8rem;
-  cursor: pointer;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.editButton {
-  background-color: #f0f0f0;
-  color: #333;
-}
-
-.deleteButton {
-  background-color: #f8d7da; /* 부드러운 빨간색 */
-  color: #721c24;
-  border-color: #f5c6cb;
-}
-
-.editButton:hover {
-  background-color: #e0e0e0;
-}
-.deleteButton:hover {
-  background-color: #f1b0b7;
-}
-
-/* --- 수정 폼 스타일 --- */
-.editForm {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.editTextarea {
-  width: 100%;
-  min-height: 100px; /* 기존 textarea와 유사하게 */
-  padding: 0.8rem;
-  border: 1px solid #ccc; /* 수정 중임을 나타내기 위해 테두리 변경 */
-  border-radius: 4px;
-  font-size: 1rem;
-  resize: vertical;
-}
-
-.editActions {
-  display: flex;
-  justify-content: flex-end; /* 버튼을 오른쪽으로 */
-  gap: 0.5rem;
-}
-
-.editActions button {
-   padding: 0.5rem 1rem;
-   font-size: 0.9rem;
-   cursor: pointer;
-   border: none;
-   border-radius: 4px;
-}
-
-.saveButton {
-  background-color: #28a745; /* 초록색 */
-  color: white;
-}
-.saveButton:hover {
-  background-color: #218838;
-}
-
-.cancelButton {
-  background-color: #ddd;
-  color: #333;
-}
-.cancelButton:hover {
-  background-color: #bbb;
-}
-
-/* 로딩 중 버튼 비활성화 스타일 */
-.submitButton:disabled,
-.editActions button:disabled,
-.postActions button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* 이미지 layout="fill" 대신 width/height 사용할 때 부모 요소 스타일 */
-.postImageContainer {
-  position: relative; /* Image width/height 쓸 때 필요 없음 */
-  /* width: 300px; 삭제 */
-  /* height: 300px; 삭제 */
-  max-width: 300px; /* 최대 너비 제한은 유지 가능 */
-  width: 100%; /* 너비를 100%로 설정 */
-  margin: 0 auto 1rem auto;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-/* Image 컴포넌트 자체에 스타일을 직접 줄 수도 있음 (위 코드 참고) */
-/* .postImage { */
-  /* object-fit: cover; */
-/* } */
-
-
-/* 모바일 반응형에서 postMeta 정렬 */
-@media (max-width: 768px) {
+  
   .postMeta {
-    flex-direction: column; /* 세로로 쌓기 */
-    align-items: flex-start; /* 왼쪽 정렬 */
-    gap: 0.5rem;
+    flex-direction: column;
+    align-items: flex-start;
   }
   .postActions {
     width: 100%;
-    text-align: right; /* 버튼 오른쪽 정렬 */
+    text-align: right;
+    margin-top: 0.5rem; /* 타임스탬프와의 간격 */
   }
 }
+

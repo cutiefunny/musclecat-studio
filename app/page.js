@@ -1,4 +1,3 @@
-// cutiefunny/musclecat-studio/musclecat-studio-69b8328c83a86b17efd454da2083bf135e4c6a70/app/page.js
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -66,15 +65,16 @@ export default function Home() {
         {/* 최신 뉴스 표시 섹션 (기존 코드 유지) */}
         <div className={styles.latestNewsContainer}>
           {latestNews.length > 0 ? latestNews.map(news => (
-            <Link href="/news" key={news.id} className={styles.newsItemLink}>
+            <Link href={`/news#${news.id}`} key={news.id} className={styles.newsItemLink}>
               <div className={styles.newsItem}>
                 {news.imageUrl && (
                   <div className={styles.newsImageContainer}>
                     <Image
                       src={news.imageUrl}
                       alt="뉴스 이미지"
-                      width={150} // Image 컴포넌트에는 width, height 필수
-                      height={150}
+                      // --- ⬇️ UPDATED: width/height를 레이아웃 확보용 값으로 변경 (CSS가 실제 크기 제어) ---
+                      width={300}
+                      height={300}
                       className={styles.newsImage}
                     />
                   </div>

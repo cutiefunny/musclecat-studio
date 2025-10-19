@@ -17,21 +17,24 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 // --- Swiper Import End ---
 
-// --- 프로젝트 데이터 Import ---
+// --- 데이터 Import ---
 import { portfolioImageUrls } from '@/data/projects'; // 분리된 데이터에서 이미지 URL 목록 가져오기
-// --- 프로젝트 데이터 Import End ---
+import { goodsItems as allGoodsItems } from '@/data/goods'; // 굿즈 데이터 가져오기
+// --- 데이터 Import End ---
 
 
 export default function Home() {
   const [latestNews, setLatestNews] = useState([]);
   const [shuffledPortfolioImages, setShuffledPortfolioImages] = useState([]);
+  const [latestGoods, setLatestGoods] = useState([]); // 최신 굿즈 상태 추가
 
   useEffect(() => {
     // --- 포트폴리오 이미지 셔플 ---
-    // portfolioImageUrls를 사용하여 셔플
     const shuffledPortfolios = [...portfolioImageUrls].sort(() => Math.random() - 0.5);
     setShuffledPortfolioImages(shuffledPortfolios);
-    // --- 포트폴리오 이미지 셔플 끝 ---
+
+    // --- 최신 굿즈 설정 (상위 3개) ---
+    setLatestGoods(allGoodsItems.slice(0, 3)); // goods 데이터에서 처음 3개 항목 가져오기
 
     // Fetch latest news
     const fetchLatestNews = async () => {
@@ -54,16 +57,16 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      {/* 타이틀 이미지 (기존 코드 유지) */}
+      {/* 타이틀 이미지 */}
       <Image src="/images/title.png" alt="근육고양이 스튜디오" width={500} height={300} style={{ width: '350px', height: 'auto' }} priority />
 
       <div className={styles.buttonContainer}>
-        {/* 뉴스 버튼 (기존 코드 유지) */}
+        {/* 뉴스 버튼 */}
         <Link href="/news">
           <Image src="/images/news-button.png" alt="뉴스 보러가기" width={200} height={80} style={{ width: 'auto', height: '50px' }} />
         </Link>
 
-        {/* 최신 뉴스 표시 섹션 (기존 코드 유지) */}
+        {/* 최신 뉴스 표시 */}
         <div className={styles.latestNewsContainer}>
           {latestNews.length > 0 ? latestNews.map(news => (
             <Link href={`/news#${news.id}`} key={news.id} className={styles.newsItemLink}>
@@ -73,7 +76,6 @@ export default function Home() {
                     <Image
                       src={news.imageUrl}
                       alt="뉴스 이미지"
-                      // --- ⬇️ UPDATED: width/height를 레이아웃 확보용 값으로 변경 (CSS가 실제 크기 제어) ---
                       width={300}
                       height={300}
                       className={styles.newsImage}
@@ -91,12 +93,12 @@ export default function Home() {
           )) : <p className={styles.noNews}>새로운 소식이 없습니다.</p>}
         </div>
 
-        {/* 포트폴리오 버튼 (기존 코드 유지) */}
+        {/* 포트폴리오 버튼 */}
         <Link href="/portfolio">
           <Image src="/images/portfolio-button.png" alt="포트폴리오 보러가기" width={200} height={80} style={{ width: 'auto', height: '50px' }} />
         </Link>
 
-        {/* 포트폴리오 이미지 슬라이더 (기존 코드 유지) */}
+        {/* 포트폴리오 이미지 슬라이더 */}
         <div className={styles.portfolioSliderContainer}>
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
@@ -120,7 +122,6 @@ export default function Home() {
             }}
             className={styles.portfolioSwiper}
           >
-            {/* 셔플된 이미지 URL 사용 */}
             {shuffledPortfolioImages.map((imageUrl, index) => (
               <SwiperSlide key={index} className={styles.portfolioSlide}>
                 <Image
@@ -129,7 +130,6 @@ export default function Home() {
                   width={300}
                   height={200}
                   className={styles.portfolioImage}
-                  // 로딩 최적화를 위해 loading="lazy" 추가 고려
                   loading="lazy"
                 />
               </SwiperSlide>
@@ -137,20 +137,44 @@ export default function Home() {
           </Swiper>
         </div>
 
-        {/* --- ⬇️ ADDED: 굿즈 버튼 추가 --- */}
+        {/* 굿즈 버튼 */}
         <Link href="/goods">
-          {/* public/images/goods-button.png 이미지가 있다고 가정 */}
           <Image src="/images/goods-button.png" alt="굿즈 보러가기" width={200} height={80} style={{ width: 'auto', height: '50px' }} />
         </Link>
-        {/* --- 굿즈 버튼 추가 끝 --- */}
 
-        {/* 문의하기 버튼 (기존 코드 유지) */}
+        {/* --- ⬇️ ADDED: 최신 굿즈 표시 섹션 추가 --- */}
+        <div className={styles.latestGoodsContainer}>
+          {latestGoods.length > 0 ? latestGoods.map(item => (
+            <Link href={item.link} key={item.id} className={styles.goodsItemLink} target="_blank" rel="noopener noreferrer">
+              <div className={styles.goodsItem}>
+                {item.imageUrl && (
+                  <div className={styles.goodsImageContainer}>
+                    <Image
+                      src={item.imageUrl}
+                      alt={item.name}
+                      width={300} // 레이아웃 확보용
+                      height={300} // 레이아웃 확보용
+                      className={styles.goodsImage}
+                    />
+                  </div>
+                )}
+                <div className={styles.goodsContent}>
+                  <h4 className={styles.goodsName}>{item.name}</h4> {/* 상품명 추가 */}
+                  <p className={styles.goodsPrice}>{item.price}</p>
+                </div>
+              </div>
+            </Link>
+          )) : <p className={styles.noGoods}>판매 중인 상품이 없습니다.</p>}
+        </div>
+        {/* --- 최신 굿즈 표시 섹션 끝 --- */}
+
+        {/* 문의하기 버튼 */}
         <Link href="/contact">
           <Image src="/images/contact-button.png" alt="문의하기" width={200} height={80} style={{ width: 'auto', height: '50px' }} />
         </Link>
 
-        {/* 연락처 정보 (기존 코드 유지) */}
-        <div className={styles.contactInfoHome}> {/* 홈 페이지용 스타일 클래스 적용 */}
+        {/* 연락처 정보 */}
+        <div className={styles.contactInfoHome}>
           <div className={styles.infoItem}>
               <FaPhone className={styles.icon} />
               <a href="tel:010-8315-1379">010-8315-1379</a>

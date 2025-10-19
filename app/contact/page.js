@@ -66,7 +66,7 @@ export default function Contact() {
           </div>
           <div className={styles.infoItem}>
             <span className={styles.icon}>▲</span>
-            <a href="https://vercel.com/cutiefunny" target="_blank" rel="noopener noreferrer">
+            <a href="https://vercel.com/musclecat-studio" target="_blank" rel="noopener noreferrer">
               Vercel Profile
             </a>
           </div>

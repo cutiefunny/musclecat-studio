@@ -96,13 +96,13 @@
 
 
 .infoItem a {
-    color: #0070f3;
+    color: #333; /* 링크 색상을 검정 계열로 변경 */
     text-decoration: none;
     word-break: break-all; /* 긴 URL 줄바꿈 */
 }
 
 .infoItem a:hover {
-    text-decoration: underline;
+    text-decoration: underline; /* 호버 시 밑줄만 표시 */
 }
 
 /* 문의 폼 (기존 스타일 유지, display: none;) */

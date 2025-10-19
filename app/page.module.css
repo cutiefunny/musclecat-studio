@@ -1,191 +1,3 @@
-.page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* justify-content: center; */ /* 중앙 정렬보다는 상단 정렬이 일반적 */
-  padding: 1rem;
-  /* PC 버전에서 최대 너비 제한 위해 margin 추가 */
-  margin: 0 auto;
-}
-
-.buttonContainer {
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  width: 100%; /* 버튼 컨테이너 너비 */
-}
-
-.latestNewsContainer,
-.latestGoodsContainer {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  width: 100%;
-  /* max-width: 90%; 삭제 -> PC에서는 .page의 max-width 적용 */
-  justify-content: center;
-  margin: 0.5rem 0;
-}
-
-.newsItemLink,
-.goodsItemLink {
-  text-decoration: none;
-  color: inherit;
-  width: 30%;
-  min-width: 250px;
-}
-
-.newsItem,
-.goodsItem {
-  border: 1px solid #eee;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  overflow: hidden;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.2s;
-  padding: 0.75rem; /* 내부 여백 추가 */
-  justify-content: space-between;
-  align-items: center;
-}
-
-.newsItem:hover,
-.goodsItem:hover {
-    transform: translateY(-5px);
-}
-
-/* --- ⬇️ UPDATED: 뉴스 이미지 컨테이너 스타일 --- */
-.newsImageContainer,
-.goodsImageContainer {
-    width: 100%;
-    margin-bottom: 0.75rem; /* 이미지와 텍스트 사이 간격 */
-    display: flex;
-    justify-content: center;
-}
-
-/* --- ⬇️ UPDATED: 뉴스 이미지 스타일 --- */
-.newsImage,
-.goodsImage {
-    max-width: 100%;
-    width: auto;
-    height: auto;
-    max-height: 150px; /* 이미지 최대 높이 제한 (선택 사항) */
-    object-fit: contain; /* 비율 유지 */
-    border-radius: 4px; /* 이미지 모서리 살짝 둥글게 */
-}
-
-
-.newsContent,
-.goodsContent {
-    /* padding: 0.75rem; 삭제 -> .newsItem으로 이동 */
-    text-align: left;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.newsText {
-  margin: 0 0 0.5rem 0;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  white-space: pre-wrap;
-  word-break: break-word;
-  display: -webkit-box;
-  -webkit-line-clamp: 7;
-  -webkit-box-orient: vertical;
-  overflow: auto;
-  text-overflow: ellipsis;
-  min-height: 4.05rem; /* line-height * line-clamp */
-}
-
-.newsDate {
-  font-size: 0.75rem;
-  color: #888;
-  text-align: right;
-}
-
-.noNews,
-.noGoods {
-  color: #999;
-  padding: 1rem;
-  font-size: 0.9rem;
-  width: 100%;
-}
-
-.goodsPrice {
-  font-size: 0.9rem;
-  color: #333;
-  margin: 0;
-  text-align: center;
-}
-
-/* --- 포트폴리오 슬라이더 --- */
-.portfolioSliderContainer {
-  /* width: 300px; 삭제 -> PC/모바일 분리 */
-  max-width: 90%; /* 모바일 기본 최대 너비 */
-  width: 100%; /* 모바일 기본 너비 */
-  margin: 1rem 0;
-}
-
-.portfolioSwiper {
-  padding-bottom: 30px;
-}
-
-.portfolioSlide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f0f0f0;
-  border-radius: 8px;
-  overflow: hidden;
-  aspect-ratio: 3 / 2;
-}
-
-.portfolioImage {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* --- 홈 페이지 연락처 정보 --- */
-.contactInfoHome {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.infoItem {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  color: #555;
-}
-
-.icon {
-  font-size: 1.1rem;
-  color: #333;
-}
-
-.infoItem a {
-  color: #555;
-  text-decoration: none;
-}
-
-.infoItem a:hover {
-  color: #0070f3;
-  text-decoration: underline;
-}
-
 /* --- 모바일 반응형 --- */
 @media (max-width: 768px) {
   .latestNewsContainer,
@@ -220,6 +32,29 @@
   .portfolioSliderContainer {
     max-width: 100%;
   }
+
+  /* --- ⬇️ ADDED: 모바일 Footer 스타일 --- */
+  .footer {
+    width: 100%;
+    margin-top: 3rem; /* 위 요소와의 간격 */
+    padding: 1rem;
+    border-top: 1px solid #eee;
+    font-size: 0.7rem; /* 모바일 폰트 크기 */
+    color: #888;
+    text-align: center;
+    background-color: #fcfcfc;
+  }
+  .footerInfo span {
+      display: block; /* 모바일에서는 줄바꿈 */
+      margin-bottom: 0.3rem;
+  }
+  .footerInfo span:last-child {
+      margin-bottom: 0;
+  }
+  .footerInfo:not(:last-child) {
+      margin-bottom: 0.5rem; /* 정보 그룹 간 간격 */
+  }
+  /* --- 모바일 Footer 스타일 끝 --- */
 }
 
 /* --- PC 반응형 --- */
@@ -248,4 +83,248 @@
     display: block !important; /* 모바일 숨김 스타일 오버라이드 */
     width: 30%; /* PC 너비 유지 */
   }
+
+  /* --- ⬇️ ADDED: PC Footer 스타일 --- */
+  .footer {
+    width: 100%;
+    margin-top: 4rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid #eee;
+    font-size: 0.75rem; /* PC 폰트 크기 */
+    color: #777;
+    text-align: center;
+    background-color: #fdfdfd;
+  }
+
+  .footerInfo {
+    margin-bottom: 0.5rem; /* 줄 간격 */
+  }
+
+  .footerInfo span:not(:last-child)::after {
+    content: ' | '; /* 구분자 */
+    margin: 0 0.5rem;
+  }
+  /* --- PC Footer 스타일 끝 --- */
+}
+
+/* --- (기존 나머지 스타일 유지) --- */
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */ /* 중앙 정렬보다는 상단 정렬이 일반적 */
+  padding: 1rem;
+  /* PC 버전에서 최대 너비 제한 위해 margin 추가 */
+  margin: 0 auto;
+}
+
+.buttonContainer {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%; /* 버튼 컨테이너 너비 */
+}
+
+.latestNewsContainer,
+.latestGoodsContainer {
+  display: flex;
+  /* flex-direction: row; -> 반응형에서 처리 */
+  gap: 1rem;
+  width: 100%;
+  /* max-width: 90%; 삭제 -> PC에서는 .page의 max-width 적용 */
+  justify-content: center;
+  margin: 0.5rem 0;
+}
+
+.newsItemLink,
+.goodsItemLink {
+  text-decoration: none;
+  color: inherit;
+  /* width: 30%; -> 반응형에서 처리 */
+  min-width: 250px;
+}
+
+.newsItem,
+.goodsItem {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s;
+  padding: 0.75rem; /* 내부 여백 추가 */
+  justify-content: space-between;
+  align-items: center;
+}
+
+.newsItem:hover,
+.goodsItem:hover {
+    transform: translateY(-5px);
+}
+
+/* --- ⬇️ UPDATED: 뉴스/굿즈 이미지 컨테이너 스타일 --- */
+.newsImageContainer,
+.goodsImageContainer {
+    width: 100%;
+    margin-bottom: 0.75rem; /* 이미지와 텍스트 사이 간격 */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 이미지 중앙 정렬 */
+    /* background-color: #f0f0f0; 이미지가 로드될 때까지 임시 배경 */
+    min-height: 150px; /* 최소 높이 설정 (선택 사항) */
+}
+
+/* --- ⬇️ UPDATED: 뉴스/굿즈 이미지 스타일 --- */
+.newsImage,
+.goodsImage {
+    max-width: 100%;
+    width: auto; /* 비율 유지 */
+    height: auto;
+    max-height: 150px; /* 이미지 최대 높이 제한 (선택 사항) */
+    object-fit: contain; /* 비율 유지하며 컨테이너 안에 맞춤 */
+    border-radius: 4px; /* 이미지 모서리 살짝 둥글게 */
+}
+
+
+.newsContent,
+.goodsContent {
+    /* padding: 0.75rem; 삭제 -> .newsItem으로 이동 */
+    text-align: left;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%; /* 내용 너비 확보 */
+}
+
+.newsText {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: auto; /* 스크롤 대신 auto 사용 */
+  text-overflow: ellipsis;
+  /* min-height 제거 또는 조정 */
+}
+
+.newsDate {
+  font-size: 0.75rem;
+  color: #888;
+  text-align: right;
+  margin-top: auto; /* 날짜를 항상 아래에 위치 */
+}
+
+.noNews,
+.noGoods {
+  color: #999;
+  padding: 1rem;
+  font-size: 0.9rem;
+  width: 100%;
+  text-align: center; /* 중앙 정렬 */
+}
+
+.goodsName { /* 상품명 스타일 추가 */
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0 0 0.3rem 0;
+    text-align: center;
+    /* 여러 줄 표시 및 말줄임 (필요시) */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 2.4rem; /* 대략 2줄 높이 */
+}
+
+
+.goodsPrice {
+  font-size: 0.9rem;
+  color: #333;
+  margin: 0;
+  text-align: center;
+}
+
+/* --- 포트폴리오 슬라이더 --- */
+.portfolioSliderContainer {
+  /* width: 300px; 삭제 -> PC/모바일 분리 */
+  max-width: 90%; /* 모바일 기본 최대 너비 */
+  width: 100%; /* 모바일 기본 너비 */
+  margin: 1rem 0;
+}
+
+.portfolioSwiper {
+  padding-bottom: 30px; /* 페이지네이션 공간 확보 */
+}
+
+/* Swiper 페이지네이션 기본 스타일 덮어쓰기 (색상 등) */
+.portfolioSwiper :global(.swiper-pagination-bullet) {
+  background-color: #aaa;
+  opacity: 0.7;
+}
+
+.portfolioSwiper :global(.swiper-pagination-bullet-active) {
+  background-color: #333;
+  opacity: 1;
+}
+
+
+.portfolioSlide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 3 / 2; /* 이미지 비율 유지 */
+}
+
+.portfolioImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지가 슬라이드를 꽉 채우도록 */
+}
+
+/* --- 홈 페이지 연락처 정보 --- */
+.contactInfoHome {
+  display: none; /* 기본적으로 숨김 */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem; /* 아이템 간 간격 증가 */
+  margin-top: 0.5rem; /* 위 요소와의 간격 증가 */
+  flex-wrap: wrap; /* 화면 작을 때 줄바꿈 */
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.icon {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.infoItem a {
+  color: #555;
+  text-decoration: none;
+}
+
+.infoItem a:hover {
+  color: #0070f3;
+  text-decoration: underline;
 }

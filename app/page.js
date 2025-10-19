@@ -33,19 +33,19 @@ export default function Home() {
 
   useEffect(() => {
     // --- 포트폴리오 이미지 셔플 ---
-    const shuffledPortfolios = [...portfolioImageUrls].sort(() => Math.random() - 0.5);
+    const shuffledPortfolios = [...portfolioImageUrls].sort(() => Math.random() - 0.5); //
     setShuffledPortfolioImages(shuffledPortfolios);
 
     // --- ⬇️ UPDATED: 최신 굿즈 설정 로직 변경 (랜덤 3개 선택) ---
     // 전체 굿즈 목록을 섞고 상위 3개 선택
-    const shuffledGoods = [...allGoodsItems].sort(() => Math.random() - 0.5);
+    const shuffledGoods = [...allGoodsItems].sort(() => Math.random() - 0.5); //
     setDisplayedGoods(shuffledGoods.slice(0, 3));
     // --- 굿즈 설정 로직 변경 끝 ---
 
     // Fetch latest news
     const fetchLatestNews = async () => {
       try {
-        const newsCollection = collection(db, 'news');
+        const newsCollection = collection(db, 'news'); //
         const q = query(newsCollection, orderBy('timestamp', 'desc'), limit(3));
         const newsSnapshot = await getDocs(q);
         const newsList = newsSnapshot.docs.map(doc => ({
@@ -67,7 +67,7 @@ export default function Home() {
     if (displayedGoods.length > 0) {
       const intervalId = setInterval(() => {
         setMobileGoodsIndex((prevIndex) => (prevIndex + 1) % displayedGoods.length);
-      }, 5000); // 3초마다 인덱스 변경
+      }, 5000); // 5초마다 인덱스 변경 (3초 -> 5초로 수정 요청하셨으므로 변경)
 
       // 컴포넌트 언마운트 시 인터벌 정리
       return () => clearInterval(intervalId);
@@ -217,6 +217,26 @@ export default function Home() {
             </div>
         </div>
       </div>
+
+      {/* --- ⬇️ ADDED: Footer 추가 --- */}
+      <footer className={styles.footer}>
+        <div className={styles.footerInfo}>
+            <span>상호: 근육고양이 스튜디오</span> {/* */}
+            <span>대표: 김준환</span> {/* */}
+            <span>사업자등록번호: 421-22-02624</span> {/* */}
+        </div>
+        <div className={styles.footerInfo}>
+             <span>주소: 서울특별시 마포구 독막로15길19 (상수동)</span> {/* */}
+        </div>
+        <div className={styles.footerInfo}>
+             <span>Tel: 010-8315-1379</span> {/* */}
+            <span>Email: cutiefunny@naver.com</span> {/* */}
+        </div>
+        <div className={styles.footerInfo}>
+          <span>© 2025 MuscleCat Studio. All rights reserved.</span>
+        </div>
+      </footer>
+       {/* --- Footer 끝 --- */}
     </div>
   );
 }

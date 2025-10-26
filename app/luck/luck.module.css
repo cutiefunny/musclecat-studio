@@ -1,9 +1,16 @@
 /* /app/luck/luck.module.css */
+.pageContainer { /* 전체 페이지 감싸는 컨테이너 추가 */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 최소 높이를 화면 높이로 설정 */
+}
+
 .page {
+    /* flex-grow: 1; */ 
     padding: 2rem;
     font-family: sans-serif;
     max-width: 600px;
-    margin: 2rem auto; /* 상하 여백 추가 및 가운데 정렬 */
+    margin: auto; /* 가로 및 세로 중앙 정렬 */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -82,15 +89,57 @@
 
 .footer {
     text-align: center;
-    margin-top: 2rem;
-    font-size: 0.9rem;
-    color: #aaa;
+    padding: 2rem 0; /* 푸터 내부 여백 */
+    width: 100%; /* 푸터 너비 */
+    background-color: #f9f9f9; /* 푸터 배경색 (선택 사항) */
+    border-top: 1px solid #eee; /* 상단 구분선 */
+    margin-top: auto; /* 푸터를 하단에 고정 */
 }
+
+/* 전화번호 등록 영역 스타일 */
+.registerContainer {
+    margin-top: 1.5rem; /* 이미지와의 간격 */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem; /* 입력 필드와 버튼 사이 간격 */
+    padding: 0 1rem; /* 좌우 여백 */
+}
+
+.phoneInput {
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    flex-grow: 1; /* 가능한 너비 차지 */
+    max-width: 150px; /* 최대 너비 제한 */
+}
+
+.registerButton {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    background-color: #333; /* 버튼 색상 */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.registerButton:hover:not(:disabled) {
+    background-color: #555;
+}
+
+.registerButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
 
 /* 모바일 반응형 */
 @media (max-width: 768px) {
     .page {
-        margin: 1rem;
         padding: 1.5rem;
     }
     .header h1 {
@@ -101,5 +150,13 @@
     }
     .fortuneText {
         font-size: 1.1rem;
+    }
+    .footer {
+        padding: 1.5rem 0;
+    }
+    .registerContainer {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
     }
 }

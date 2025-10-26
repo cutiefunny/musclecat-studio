@@ -1,5 +1,9 @@
+// app/layout.js
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+
+import AlertModal from "@/components/common/AlertModal";
+import ConfirmModal from "@/components/common/ConfirmModal";
 
 export const metadata = {
   applicationName: "근육고양이 스튜디오",
@@ -42,6 +46,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         {children}
+        <AlertModal />
+        <ConfirmModal />
       </body>
     </html>
   );

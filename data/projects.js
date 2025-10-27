@@ -99,6 +99,17 @@ export const projects = [
     serviceUrl: "https://stock-info-smoky.vercel.app/",
     techStack: ["Next.js", "TypeScript", "Firebase", "PWA", "한국투자증권 Open API"]
   },
+  {
+    id: "luck",
+    name: "근육고양이 운세톡",
+    description: "사용자의 카카오톡으로 매일 아침 운세를 보내주는 서비스입니다. 근육고양이 스튜디오에서 제공하는 무료 서비스이며, 간단한 번호 등록으로 이용 가능합니다.",
+    shortDescription: "사용자의 카카오톡으로 매일 아침 운세를 보내주는 서비스입니다.",
+    imageUrl: "/images/luck-title.png",
+    detailImageUrl: "/images/luck-detail.jpg",
+    githubUrl: "https://github.com/cutiefunny/musclecat-studio",
+    serviceUrl: "https://musclecat-studio.com/luck",
+    techStack: ["node.js","Firebase","Solapi"]
+  },
 ];
 
 // 홈 페이지 슬라이더에 사용할 이미지 목록 (필요한 경우 projects 데이터에서 추출)

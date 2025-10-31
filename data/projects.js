@@ -7,7 +7,7 @@ export const projects = [
     shortDescription: "드래그 앤 드롭 방식으로 챗봇의 대화 흐름을 시각적으로 설계하는 도구입니다.", // portfolio/page.js용 짧은 설명 추가
     imageUrl: "/images/chatbot-builder.jpg",
     detailImageUrl: "/images/chatbot-builder.jpg", // 상세 페이지용 이미지 URL (동일하면 동일하게)
-    githubUrl: "https://github.com/cutiefunny/react-flow",
+    githubUrl: null,
     serviceUrl: null,
     techStack: ["React", "React Flow", "TypeScript","Firebase"]
   },
@@ -18,7 +18,7 @@ export const projects = [
     shortDescription: "자연어 처리 기술과 시나리오 기반 응답을 결합한 지능형 챗봇입니다.",
     imageUrl: "/images/hybrid-chatbot.jpg",
     detailImageUrl: "/images/hybrid-chatbot.jpg",
-    githubUrl: "https://github.com/cutiefunny/clt-chatbot",
+    githubUrl: null,
     serviceUrl: null,
     techStack: ["Next.js", "TypeScript", "Firebase", /* ... 확인 필요 ... */ ]
   },

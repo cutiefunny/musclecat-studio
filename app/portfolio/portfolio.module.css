@@ -64,6 +64,7 @@
     font-size: 1rem;
     margin: 0 1rem 1rem;
     color: #555;
+    word-break: keep-all;
 }
 
 .projectCardLink {
@@ -95,6 +96,7 @@
   width: 100%;
   max-width: 800px; /* 내용 최대 너비 설정 */
   text-align: left; /* 텍스트 왼쪽 정렬 */
+  word-break: keep-all;
 }
 
 .projectLinks {

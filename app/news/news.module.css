@@ -124,6 +124,7 @@
     line-height: 1.6;
     margin: 0 0 1rem 0; /* 상단 여백 제거 */
     white-space: pre-wrap;
+    word-break: keep-all;
 }
 
 /* --- ⬇️ REMOVED: .postImageContainer 스타일 제거 --- */

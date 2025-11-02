@@ -213,6 +213,7 @@
   -webkit-box-orient: vertical;
   overflow: auto; /* 스크롤 대신 auto 사용 */
   text-overflow: ellipsis;
+  word-break: keep-all;
   /* min-height 제거 또는 조정 */
 }
 
@@ -252,6 +253,7 @@
   color: #333;
   margin: 0;
   text-align: center;
+  word-break: keep-all; /* ⬇️ ADDED: 띄어쓰기 단위로 줄바꿈 */
 }
 
 /* --- 포트폴리오 슬라이더 --- */

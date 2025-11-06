@@ -6,7 +6,8 @@ import Link from 'next/link';
 import styles from "./page.module.css";
 import Image from 'next/image';
 import { db } from '@/lib/firebase/clientApp';
-import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
+// [수정] doc, getDoc, setDoc, increment 추가
+import { collection, query, orderBy, limit, getDocs, doc, getDoc, setDoc, increment } from 'firebase/firestore';
 import { FaPhone, FaEnvelope, FaInstagram } from 'react-icons/fa';
 
 // --- Swiper Import ---
@@ -35,6 +36,9 @@ export default function Home() {
   const [displayedEntertainment, setDisplayedEntertainment] = useState([]);
   const [mobileEntertainmentIndex, setMobileEntertainmentIndex] = useState(0);
   // --- 엔터테인먼트 상태 끝 ---
+
+  // [추가] 방문자 수 상태
+  const [visitorCount, setVisitorCount] = useState(null);
 
 
   useEffect(() => {
@@ -71,7 +75,41 @@ export default function Home() {
       }
     };
 
+    // [추가] 방문자 수 로드 및 증가 로직
+    const fetchAndIncrementVisitorCount = async () => {
+      // 경고: 'analytics/visitors' 경로는 가정된 값입니다.
+      const visitorDocRef = doc(db, 'analytics', 'visitors'); 
+      const visitKey = 'visitCountedDate';
+      const today = new Date().toISOString().split('T')[0];
+
+      try {
+        // 1. 현재 방문자 수 먼저 가져오기
+        const docSnap = await getDoc(visitorDocRef);
+        let currentCount = 0;
+        if (docSnap.exists()) {
+          currentCount = docSnap.data().total;
+          setVisitorCount(currentCount);
+        } else {
+          setVisitorCount(0); // 문서가 없으면 0부터 시작
+        }
+
+        // 2. 오늘 방문했는지 확인하고, 안 했으면 카운트 증가
+        if (localStorage.getItem(visitKey) !== today) {
+          // 문서가 없으면 생성하고, 있으면 { merge: true }로 병합, increment(1)로 1 증가
+          await setDoc(visitorDocRef, { total: increment(1) }, { merge: true });
+          localStorage.setItem(visitKey, today);
+          
+          // 화면에 즉시 반영
+          setVisitorCount(currentCount + 1);
+        }
+      } catch (error) {
+        console.error("방문자 수 처리 중 오류 발생:", error);
+        // 오류가 발생해도 페이지 로드는 계속되도록 함
+      }
+    };
+
     fetchLatestNews();
+    fetchAndIncrementVisitorCount(); // [추가] 함수 호출
   }, []); 
 
   // --- 모바일 굿즈 순환 로직 (유지) ---
@@ -97,6 +135,13 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
+      {/* [추가] 방문자 수 카운터 */}
+      {visitorCount !== null && (
+        <div className={styles.visitorCounter}>
+          total {visitorCount.toLocaleString()}
+        </div>
+      )}
+
       {/* 타이틀 이미지 */}
       <Image src="/images/title.png" alt="근육고양이 스튜디오" width={500} height={300} style={{ width: '350px', height: 'auto' }} priority />
 

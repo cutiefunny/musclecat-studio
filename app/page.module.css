@@ -55,6 +55,14 @@
       margin-bottom: 0.5rem; /* 정보 그룹 간 간격 */
   }
   /* --- 모바일 Footer 스타일 끝 --- */
+
+  /* [수정] 방문자 수 모바일 스타일 - top 값 변경 */
+  .visitorCounter {
+    top: 4rem; /* 1rem -> 14rem으로 변경 (타이틀 이미지 하단) */
+    right: 1rem;
+    font-size: 0.8rem;
+    padding: 0.2rem 0.4rem;
+  }
 }
 
 /* --- PC 반응형 --- */
@@ -105,6 +113,13 @@
     margin: 0 0.5rem;
   }
   /* --- PC Footer 스타일 끝 --- */
+
+  /* [추가] 방문자 수 PC 스타일 */
+  .visitorCounter {
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 0.9rem;
+  }
 }
 
 /* --- (기존 나머지 스타일 유지) --- */
@@ -116,6 +131,7 @@
   padding: 1rem;
   /* PC 버전에서 최대 너비 제한 위해 margin 추가 */
   margin: 0 auto;
+  position: relative; /* [수정] 방문자 수 위치 기준점 */
 }
 
 .buttonContainer {
@@ -329,4 +345,16 @@
 .infoItem a:hover {
   color: #0070f3;
   text-decoration: underline;
+}
+
+/* [추가] 방문자 수 카운터 스타일 */
+.visitorCounter {
+  position: absolute;
+  color: #888;
+  background-color: rgba(249, 249, 249, 0.7); /* 반투명 배경 */
+  padding: 0.25rem 0.75rem;
+  border-radius: 8px;
+  font-weight: 500;
+  z-index: 10;
+  /* top, right, font-size는 반응형 섹션에서 정의됨 */
 }

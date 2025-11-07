@@ -11,7 +11,7 @@ export const metadata = {
     default: "근육고양이 스튜디오",
     template: "근육고양이 스튜디오",
   },
-  description: "강력한 소프트웨어 개발 스튜디오다!",
+  description: "낭만 개발회사 근육고양이 스튜디오입니다. AI 챗봇, 웹/모바일 앱 등 다양한 소프트웨어 개발 프로젝트를 수행합니다. 게임, 만화 등의 즐길거리는 덤!",
   keywords: ["development", "studio", "musclecat", "software", "web", "app"],
   manifest: "/manifest.json",
   appleWebApp: {

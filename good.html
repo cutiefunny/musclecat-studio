@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>굿즈 제작 단가표</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* 기본 설정 */
+        :root {
+            --primary-color: #333333;
+            --accent-color: #2c3e50;
+            --bg-color: #f4f4f4;
+            --paper-color: #ffffff;
+            --border-color: #eeeeee;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            color: var(--primary-color);
+        }
+
+        /* A4 용지 규격 (210mm x 297mm) 시뮬레이션 */
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            background-color: var(--paper-color);
+            padding: 40px 50px;
+            box-sizing: border-box;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        /* 헤더 스타일 */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin: 0 0 10px 0;
+            color: var(--accent-color);
+        }
+
+        .sub-title {
+            font-size: 16px;
+            color: #666;
+        }
+
+        /* 섹션 및 테이블 스타일 */
+        section {
+            margin-bottom: 35px;
+        }
+
+        h2 {
+            font-size: 20px;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 10px;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f9f9f9;
+            font-weight: 700;
+            width: 60%;
+        }
+
+        td {
+            text-align: right;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .price {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .unit {
+            font-size: 14px;
+            font-weight: normal;
+            color: #888;
+        }
+
+        /* 옵션 및 비고 강조 */
+        .note {
+            font-size: 13px;
+            color: #e74c3c;
+            margin-top: 5px;
+            text-align: right;
+            display: block;
+        }
+
+        .highlight-row {
+            background-color: #fcfcfc;
+        }
+
+        /* 푸터 */
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        /* 인쇄/PDF 저장 버튼 (화면에만 보임) */
+        .print-btn-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .print-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: 'Noto Sans KR', sans-serif;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background 0.3s;
+        }
+
+        .print-btn:hover {
+            background-color: #1a252f;
+        }
+
+        /* 인쇄 시 설정 (@media print) */
+        @media print {
+            body {
+                background: none;
+                margin: 0;
+                padding: 0;
+            }
+            .page {
+                width: 100%;
+                height: auto;
+                box-shadow: none;
+                margin: 0;
+                padding: 20px;
+                border: none;
+            }
+            .print-btn-container {
+                display: none; /* 인쇄 시 버튼 숨김 */
+            }
+            /* 배경색 인쇄 강제 설정 (브라우저 설정에 따라 다를 수 있음) */
+            th {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="print-btn-container">
+        <button class="print-btn" onclick="window.print()">📄 PDF로 저장 / 인쇄하기</button>
+    </div>
+
+    <div class="page">
+        <header>
+            <h1>2025년도 굿즈 제작 단가표</h1>
+            <div class="sub-title">상호: 근육고양이잡화점 | 대표: 김준환 | 사업자등록번호: 810-16-01858</div>
+        </header>
+
+        <section>
+            <h2>APPAREL (의류)</h2>
+            <table>
+                <tr>
+                    <th>반팔티</th>
+                    <td><span class="price">10,000</span> <span class="unit">원</span></td>
+                </tr>
+                <tr>
+                    <th>맨투맨</th>
+                    <td><span class="price">17,000</span> <span class="unit">원</span></td>
+                </tr>
+                <tr>
+                    <th>후드티</th>
+                    <td><span class="price">19,000</span> <span class="unit">원</span></td>
+                </tr>
+            </table>
+            <span class="note">* 양면 인쇄 시 장당 2,000원 추가</span>
+        </section>
+
+        <section>
+            <h2>STATIONERY (뱃지 / 스티커)</h2>
+            <table>
+                <tr>
+                    <th>뱃지 (32mm)</th>
+                    <td><span class="price">500</span> <span class="unit">원</span></td>
+                </tr>
+                <tr>
+                    <th>뱃지 (44mm)</th>
+                    <td><span class="price">700</span> <span class="unit">원</span></td>
+                </tr>
+                <tr>
+                    <th>스티커 (8x12 size)</th>
+                    <td><span class="price">500</span> <span class="unit">원</span></td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>ACCESSORIES (잡화)</h2>
+            <table>
+                <tr>
+                    <th>키링</th>
+                    <td><span class="price">1,500</span> <span class="unit">원</span></td>
+                </tr>
+                <tr>
+                    <th>에코백</th>
+                    <td><span class="price">3,000</span> <span class="unit">원</span></td>
+                </tr>
+            </table>
+        </section>
+
+        <footer>
+            <p>본 단가표는 부가세(VAT) 포함 금액이며, 제작 수량에 따라 변동될 수 있습니다.</p>
+            <p>문의: 010-8315-1379 | cutiefunny@naver.com</p>
+            <p>계좌: 하나은행 227-891372-90807 김준환</p>
+        </footer>
+    </div>
+
+</body>
+</html>

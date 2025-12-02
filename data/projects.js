@@ -23,6 +23,17 @@ export const projects = [
     techStack: ["Next.js", "TypeScript", "Firebase", /* ... 확인 필요 ... */ ]
   },
   {
+      id: "daehwajang",
+      name: "소셜 모임앱",
+      description: "관심사 기반의 모임 참여, 이벤트 확인 및 멤버 추천 기능을 제공하는 소셜 모임·커뮤니티 플랫폼입니다. 포트원 결제와 푸시 알림을 포함합니다. 2026년에 레인메이커협동조합에 납품되어 대구 지역에서 서비스 예정입니다.",
+      shortDescription: "모임 개설, 탐색과 채팅 기능을 제공하는 소셜 플랫폼입니다.",
+      imageUrl: "/images/daehwajang.jpg",
+      detailImageUrl: "/images/daehwajang-detail.jpg",
+      githubUrl: "https://github.com/cutiefunny/daehwajang",
+      serviceUrl: "https://daehwajang.vercel.app/",
+      techStack: ["SvelteKit", "Firebase", "PWA", "Vite", "Embla Carousel", "Lucide Svelte", "FCM", "Vercel"]
+  },
+  {
     id: "cleaning-app",
     name: "청소중개앱",
     description: "청소 서비스를 필요로 하는 사용자와 청소 업체를 연결하는 중개 플랫폼입니다. 사용자는 앱을 통해 간편하게 청소 예약을 하고, 업체는 새로운 고객을 확보할 수 있습니다. 2025년에 픽큐에 납품되었습니다.",
@@ -74,7 +85,7 @@ export const projects = [
     imageUrl: "/images/video-call-app.jpg",
     detailImageUrl: "/images/video-call-app-detail.jpg",
     githubUrl: "https://github.com/cutiefunny/live-cam",
-    serviceUrl: "https://live-cam-eta.vercel.app/",
+    serviceUrl: "https://www.chuihyang.com/creator/",
     techStack: ["WebRTC", "Next.js", "peerJS", "Firebase Realtime Database"]
   },
   {
@@ -87,6 +98,17 @@ export const projects = [
     githubUrl: "https://github.com/cutiefunny/sangsu-cat-wiki",
     serviceUrl: "https://sangsu-cat-wiki.vercel.app/",
     techStack: ["Next.js", "Firebase", "Naver Maps API", "PWA"]
+  },
+  {
+    id: "fitmeet",
+    name: "운동커플 매칭앱",
+    description: "FitMeet은 사용자의 위치, 주 종목, 나이 등을 기반으로 최적의 운동 파트너를 추천해 주는 PWA 기반 웹 애플리케이션입니다. 스와이프 기반 매칭(Tinder 스타일), 상호 매칭 시 채팅 가능, Firestore 기반 실시간 채팅 및 읽음 확인, FCM 푸시 알림, 관리자 대시보드 등을 제공합니다. 근육고양이 스튜디오에서 제공하는 무료 서비스이며 앱을 설치하거나 웹에 접속하여 자유롭게 이용할 수 있습니다.",
+    shortDescription: "위치와 취향 기반의 운동 파트너 매칭앱입니다.",
+    imageUrl: "/images/fitmeet.jpg",
+    detailImageUrl: "/images/fitmeet_detail.jpg",
+    githubUrl: "https://github.com/cutiefunny/fitmeet",
+    serviceUrl: "https://fitmeet-theta.vercel.app/",
+    techStack: ["SvelteKit", "Svelte", "Firebase", "PWA", "Swiper.js", "Vercel"]
   },
   {
     id: "stock-bot",

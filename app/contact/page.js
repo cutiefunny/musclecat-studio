@@ -52,7 +52,7 @@ export default function Contact() {
           </div>
           <div className={styles.infoItem}>
             <FaInstagram className={styles.icon} />
-            <a href="https://instagram.com/musclecat_mart" target="_blank" rel="noopener noreferrer">@musclecat_mart</a>
+            <a href="https://instagram.com/musclecat_studio" target="_blank" rel="noopener noreferrer">@musclecat_studio</a>
           </div>
         </section>
 

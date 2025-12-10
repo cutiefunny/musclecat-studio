@@ -23,6 +23,18 @@ export const projects = [
     techStack: ["Next.js", "TypeScript", "Firebase", /* ... 확인 필요 ... */ ]
   },
   {
+    id: "eink-news",
+    name: "E-ink News",
+    description: "E-ink 단말기의 특성을 고려하여 가독성을 극대화한 뉴스 앱입니다. SolidJS로 개발되어 매우 가볍고 빠르며, 고품질 TTS 기능을 내장하여 화면을 보지 않고도 뉴스를 청취할 수 있습니다.",
+    shortDescription: "E-ink 단말기에 최적화된 초경량 뉴스 앱입니다.",
+    imageUrl: "/images/eink-news.jpg",
+    detailImageUrl: "/images/eink-news-detail.jpg",
+    githubUrl: "https://github.com/cutiefunny/eink-news",
+    serviceUrl: "https://eink-news.vercel.app/",
+    download: "/apk/eink-news.apk",
+    techStack: ["SolidJS", "Vite", "TTS API"]
+  },
+  {
       id: "daehwajang",
       name: "소셜 모임앱",
       description: "관심사 기반의 모임 참여, 이벤트 확인 및 멤버 추천 기능을 제공하는 소셜 모임·커뮤니티 플랫폼입니다. 포트원 결제와 푸시 알림을 포함합니다. 2026년에 레인메이커협동조합에 납품되어 대구 지역에서 서비스 예정입니다.",

@@ -10,7 +10,6 @@ export default function ProjectDetail({ params }) {
   const project = projects.find(p => p.id === projectId);
 
   if (!project) {
-    // 간단한 Not Found 처리 또는 Next.js의 notFound() 사용 고려
     return <div className={styles.page}><h1>프로젝트를 찾을 수 없습니다.</h1></div>;
   }
 
@@ -60,7 +59,15 @@ export default function ProjectDetail({ params }) {
                 서비스 바로가기
               </a>
             )}
-            {!project.githubUrl && !project.serviceUrl && (
+            
+            {/* APK 다운로드 버튼 추가 */}
+            {project.download && (
+              <a href={project.download} download className={styles.projectLinkButton}>
+                APK 다운로드
+              </a>
+            )}
+
+            {!project.githubUrl && !project.serviceUrl && !project.download && (
               <p>관련 링크가 없습니다.</p>
             )}
           </div>

@@ -34,7 +34,7 @@ export const entertainmentItems = [
     name: "길냥이 서바이벌",
     description: "벌판의 들개들로부터 살아 남자! 뱀서류 길고양이 게임입니다.", // (projects.js의 shortDescription)
     imageUrl: "/images/catsurvival-title.png",
-    link: "https://cat-survival.vercel.app/",
+    link: "https://cat-survival-lite.vercel.app/",
   },
   {
     id: "wallballshot",

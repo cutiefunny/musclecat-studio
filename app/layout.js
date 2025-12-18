@@ -4,6 +4,7 @@ import "./globals.css";
 
 import AlertModal from "@/components/common/AlertModal";
 import ConfirmModal from "@/components/common/ConfirmModal";
+import GlobalModalManager from "@/components/common/GlobalModalManager"; // 새로 만들 컴포넌트
 
 export const metadata = {
   applicationName: "근육고양이 스튜디오",
@@ -43,11 +44,12 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body>
         {children}
         <AlertModal />
         <ConfirmModal />
+        <GlobalModalManager /> 
       </body>
     </html>
   );

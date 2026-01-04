@@ -1,0 +1,261 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #333;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.homeLink {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #666;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.homeLink:hover {
+  text-decoration: underline;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.description {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* Form Styles */
+.formSection {
+  background-color: #f9f9f9;
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+}
+
+.inputNickname {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 200px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.inputNickname:focus {
+  border-color: #000;
+}
+
+.textarea {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  min-height: 100px;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.textarea:focus {
+  border-color: #000;
+}
+
+.submitButton {
+  padding: 12px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submitButton:hover {
+  background-color: #333;
+}
+
+.submitButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* List Styles */
+.listTitle {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.commentList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.commentItem {
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 20px;
+  transition: transform 0.2s;
+  position: relative;
+}
+
+.commentItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.commentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.authorInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.commentAuthor {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #222;
+}
+
+.commentDate {
+  font-size: 0.85rem;
+  color: #999;
+}
+
+.editedLabel {
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+.commentContent {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #444;
+  white-space: pre-wrap;
+}
+
+/* Action Buttons */
+.actionButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.iconButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  padding: 5px;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.iconButton:hover {
+  color: #000;
+}
+
+.deleteButton:hover {
+  color: #ff4444;
+}
+
+/* Edit Mode Styles */
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.editTextarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.editActions {
+  display: flex;
+  gap: 10px;
+}
+
+.saveButton, .cancelButton {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: none;
+}
+
+.saveButton {
+  background-color: #000;
+  color: #fff;
+}
+
+.cancelButton {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 40px;
+  color: #999;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  .title {
+    font-size: 2rem;
+  }
+  
+  .inputNickname {
+    width: 100%;
+  }
+  
+  .container {
+    padding: 20px 15px;
+  }
+}

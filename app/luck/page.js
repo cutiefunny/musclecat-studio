@@ -55,11 +55,11 @@ export default function LuckPage() {
         try {
           const response = await fetch('https://musclecat.co.kr/getOneFortune', { method: 'POST' });
           if (!response.ok) throw new Error('API 호출 실패');
-          const data = await response.json();
-          if (data.result === 'success' && data.fortune) {
-            setFortune(data.fortune);
+          const fortuneText = await response.text();
+          if (fortuneText && fortuneText.trim()) {
+            setFortune(fortuneText);
             if (typeof window !== 'undefined') {
-                try { localStorage.setItem('dailyFortune', JSON.stringify({ fortune: data.fortune, date: currentDate })); }
+                try { localStorage.setItem('dailyFortune', JSON.stringify({ fortune: fortuneText, date: currentDate })); }
                 catch (e) { console.error("localStorage 쓰기 오류:", e); }
             }
           } else { throw new Error('운세 정보 못 받아옴'); }
